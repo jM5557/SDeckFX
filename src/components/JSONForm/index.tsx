@@ -7,7 +7,7 @@ interface JSONFormProps {}
 
 let defaultPackJSONSettings: PackJSON = {
     name: "Custom SFX Pack",
-    description: "Custom SFX Pack created on SDeckSound.com",
+    description: "Custom SFX Pack created on SDeckFX.com",
     author: "N/A",
     version: "v1.0",
     manifest_version: 2,
