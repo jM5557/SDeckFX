@@ -86,4 +86,15 @@
             }
         }
     }
+
+    @media all and (max-width: 640px) {
+        .buttons {
+            display: block;
+
+            .button-icon {
+                width: 100%;
+                margin-top: 8px;
+            }
+        }
+    }
 }
