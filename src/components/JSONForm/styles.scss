@@ -1,0 +1,81 @@
+@import "./../../variables.scss";
+
+.json-form {
+    display: block;
+
+    form {
+        display: block;
+        max-width: 640px;
+        margin: auto;
+        padding: 16px 0px;
+
+        .inner-form {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            .description-textarea {
+                flex: 1 1;
+                margin-top: 0px;
+                margin-left: 16px;
+
+                textarea {
+                    display: block;
+                    width: 100%;
+                }
+            }
+
+            @media all and (max-width: 720px) {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+
+                & > div {
+                    flex: 1 1;
+                    width: 100%;
+
+                    input[type="text"] {
+                        width: 100%;
+                    }
+                }
+
+                .description-textarea {
+                    margin: auto;
+                    width: 100%;
+                    flex: 1 1;
+                }
+            }
+        }
+    }
+
+    label {
+        display: block;
+        margin-bottom: 16px;
+
+        b {
+            font-family: #{ $headerFont };
+            display: table;
+            color: #{ $accent_1 };
+            margin-bottom: 4px;
+        }
+
+        input[type="text"], textarea {
+            background-color: #{ $color_2 };
+            color: #{ $text_1 };
+            border: none;
+            padding: 8px;
+        }
+    }
+
+    .download {
+        margin-left: auto;
+        margin-right: 0px;
+    }
+
+    @media all and (max-width: 720px) {
+        .download { 
+            margin-top: 12px;
+        }
+    }
+}

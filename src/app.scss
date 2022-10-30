@@ -1,0 +1,235 @@
+@import "./variables.scss";
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+   scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+    background: #{ $bg_1 };
+    color: #{ $text_1 };
+    font-family: $bodyFont;
+}
+
+header, h1, h2, h3, h4, h5, h6 {
+    font-family: $headerFont;
+}
+
+.panel {
+    width: 90%;
+    margin: auto auto auto auto;
+    max-width: 1280px;
+
+    background-color: #222223;
+    border-radius: 24px;
+    box-shadow: 0px 0px 24px -8px #111;
+    padding: 8px 16px;
+
+    & > header {
+      padding: 16px;
+    }
+
+    .audio-item {
+        padding: 16px;
+    }
+
+    &.audio-items {
+      margin-top: -128px;
+      max-height: 480px;
+      overflow-y: auto;
+    }
+
+    &.json-form {
+      margin-top: 16px;
+      margin-top: -104px;
+    }
+}
+
+#root {
+    width: 100%;
+}
+
+* {
+    margin-block-end: auto;
+    margin-block-start: auto;
+}
+
+.button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  background-color: #{$color_2};
+  color: #{$text_1};
+  border-radius: 12px;
+  font-family: #{$headerFont};
+  border: none;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: transform 0.32s cubic-bezier(0.23, 1, 0.320, 1);
+  
+  &:active {
+      transform: scale(0.95);
+      opacity: 0.65;
+  }
+
+  svg {
+      margin-right: 12px;
+      width: 24px;
+      height: 24px;
+  }
+
+  span {
+      display: table;
+  }
+
+  &.download {
+      background-color: #{ $accent_1 };
+      color: #{ $bg_1 };
+
+      svg path {
+          stroke: #{ $bg_1 };
+      }
+  }
+}
+
+.button-icon-only {
+  padding: 12px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  transition: transform 0.32s cubic-bezier(0.23, 1, 0.320, 1);
+  
+  &:active {
+      transform: scale(0.95);
+      opacity: 0.65;
+  }
+
+  span {
+      display: none;
+  }
+
+  svg {
+      width: 24px;
+      height: 24px;
+  }
+}
+
+.button-icon, .button-icon-only {
+  animation: fadeIn 0.48s cubic-bezier(0.23, 1, 0.320, 1) forwards 1;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+
+  to {
+      opacity: 1;
+  }
+}
+
+.banner {
+  padding: 64px 16px 128px;
+  background-color: hsl(25, 100%, 68%);
+  color: #{ $bg_1 };
+  text-align: center;
+
+  header {
+    font-size: 1.5rem;
+    font-family: #{ $headerFont };
+    margin-bottom: 16px;
+  }
+
+  p {
+    max-width: 480px;
+    margin: auto;
+    text-align: left;
+  }
+
+  &.json-form-banner {
+    margin-top: 32px;
+  }
+
+  strong {
+    padding: 4px;
+    background-color: hsl(25, 50%, 50%);
+    border-radius: 8px;
+    display: inline-block;
+    margin: 2px auto;
+  }
+}

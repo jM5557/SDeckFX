@@ -1,0 +1,56 @@
+@import "./../../variables.scss";
+
+.site-header {
+    padding: 32px 16px 128px;
+    background-color: #{ $accent_1 };
+    background: linear-gradient(135deg, rgba(77,154,227,1) 0%, rgba(89,161,227,1) 33%, rgba(158,208,255,1) 100%);
+
+    color: #{ $bg_1 };
+    margin-bottom: 32px;
+
+    .inner {
+        h1 {
+            font-size: 2rem;
+            line-height: 2rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            padding-top: 16px;
+        }
+
+        p {
+            max-width: 480px;
+            margin: auto;
+            padding: 32px 8px 0px;
+            text-align: left;
+        }
+
+        .links {
+            max-width: 480px;
+            margin: auto;
+            padding: 32px 8px 32px;
+
+            a {
+                display: inline-block;
+                padding: 12px;
+                width: 45%;
+                margin-left: 8px;
+                background-color: #FFF;
+                color: #{ $bg_1 };
+                border-radius: 500px;
+                font-family: $headerFont;
+                text-decoration: none;
+                text-align: center;
+                box-shadow: 0px 0px 24px -12px #{ $bg_1 };
+            }
+        }
+    }
+
+    small {
+        text-align: right;
+        font-size: small;
+        margin-right: 0px;
+        display: block;
+    }
+}

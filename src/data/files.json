@@ -1,0 +1,170 @@
+[
+    {
+        "title": "Achievement Toast",
+        "description": "Played when a user unlocks an achievement in a Steam game.",
+        "fileName": "deck_ui_achievement_toast.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Bumper End 02",
+        "description": "Played when attempting to navigate and being unable to move further.",
+        "fileName": "deck_ui_bumper_end_02.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Default Activation",
+        "description": "Played when selecting most interactable objects.",
+        "fileName": "deck_ui_default_activation.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Hide Modal",
+        "description": "Played when exiting most pop-ups.",
+        "fileName": "deck_ui_hide_modal.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Into Game Detail",
+        "description": "Played when opening a game's details page.",
+        "fileName": "deck_ui_into_game_detail.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Launch Game",
+        "description": "Played when launching a game.",
+        "fileName": "deck_ui_launch_game.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Misc 10",
+        "description": "Played when navigating through most areas.",
+        "fileName": "deck_ui_misc_10.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Navigation",
+        "description": "Played when navigating through specific areas (ex. Settings).",
+        "fileName": "deck_ui_navigation.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Out of Game Detail",
+        "description": "Played when exiting a game's details page.",
+        "fileName": "deck_ui_out_of_game_detail.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Show Modal",
+        "description": "Played when a pop-up appears.",
+        "fileName": "deck_ui_show_modal.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Side Menu Fly In",
+        "description": "Played when opening the Steam or Quick Access menus.",
+        "fileName": "deck_ui_side_menu_fly_in.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Side Menu Fly Out",
+        "description": "Played when exiting the Steam or Quick Access menus.",
+        "fileName": "deck_ui_side_menu_fly_out.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Slider Down",
+        "description": "Played when decreasing a slider.",
+        "fileName": "deck_ui_slider_down.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Slider Up",
+        "description": "Played when increasing a slider.",
+        "fileName": "deck_ui_slider_up.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Switch Toggle On",
+        "description": "Played when toggling on a toggle.",
+        "fileName": "deck_ui_switch_toggle_on.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Switch Toggle Off",
+        "description": "Played when toggling off a toggle.",
+        "fileName": "deck_ui_switch_toggle_off.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Tab Transition 01",
+        "description": "Played when switching between tabs (ex. Library views).",
+        "fileName": "deck_ui_tab_transition_01.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Toast",
+        "description": "Played when a toast appears at the bottom-right corner of the UI.",
+        "fileName": "deck_ui_toast.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Typing",
+        "description": "Played when typing on the keyboard.",
+        "fileName": "deck_ui_typing.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Volume",
+        "description": "Played when confirming the volume setting in Settings.",
+        "fileName": "deck_ui_volume.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Bumper End",
+        "description": "Unknown or unused.",
+        "fileName": "bumper_end.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Confirmation Negative",
+        "description": "Unknown or unused.",
+        "fileName": "confirmation_negative.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Confirmation Positive",
+        "description": "Unknown or unused.",
+        "fileName": "confirmation_positive.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Message Toast",
+        "description": "Unknown or unused.",
+        "fileName": "deck_ui_message_toast.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Misc 01",
+        "description": "Unknown or unused.",
+        "fileName": "deck_ui_misc_01.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Misc 08",
+        "description": "Unknown or unused.",
+        "fileName": "deck_ui_misc_08.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Pop Sound",
+        "description": "Unknown or unused.",
+        "fileName": "pop_sound.wav",
+        "format": "wav"
+    },
+    {
+        "title": "Tile Scroll",
+        "description": "Unknown or unused.",
+        "fileName": "deck_ui_tile_scroll.wav",
+        "format": "wav"
+    }
+]
