@@ -1,0 +1,40 @@
+@import "./../../variables.scss";
+
+.site-footer {
+    padding: 64px 16px;
+
+    .inner {
+        max-width: 640px;
+        text-align: left;
+        margin: auto;
+
+        .link {
+            padding: 8px 0px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            b {
+                margin-right: 24px;
+            }
+
+            a {
+                color: #{ $accent_1 };
+                text-decoration: none;
+            }
+
+            @media all and (max-width: 640px) {
+                display: block;
+
+                b {
+                    margin-right: auto;
+                    margin-bottom: 8px;
+                }
+
+                a {
+                    display: table;
+                }
+            }
+        }
+    }
+}

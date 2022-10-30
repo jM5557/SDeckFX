@@ -4,6 +4,7 @@ import { AudioFile } from './types';
 import "./app.scss";
 import SiteHeader from './components/SiteHeader';
 import JSONForm from './components/JSONForm';
+import SiteFooter from './components/SiteFooter';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <JSONForm />
         </section>
       </main>
+      <SiteFooter />
     </div>
   )
 }
