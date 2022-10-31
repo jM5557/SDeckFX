@@ -69,8 +69,7 @@
 
             .button-icon-only {
                 align-self: flex-end;
-                margin-right: 8px;
-                margin-left: auto;
+                margin-left: 8px;
                 margin-top: 8px;
             }
 
@@ -94,6 +93,11 @@
             .button-icon {
                 width: 100%;
                 margin-top: 8px;
+            }
+
+            .button-icon-only {
+                margin-left: auto;
+                margin-right: 0px;
             }
         }
     }

@@ -15,3 +15,5 @@ export type PackJSON = {
     ignore: [],
     mappings: {}
 }
+
+export type AudioFileWithReplacement = AudioFile & { replacement: File | null };

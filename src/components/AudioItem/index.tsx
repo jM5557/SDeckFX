@@ -1,5 +1,5 @@
-import { RefObject, SyntheticEvent, useRef, useState } from "react";
-import { AudioFile } from "../../types";
+import { RefObject, SyntheticEvent, useEffect, useRef, useState } from "react";
+import { AudioFile, AudioFileWithReplacement } from "../../types";
 import { ReactComponent as DownloadIcon } from "./download-icon-w-32px.svg"
 import { ReactComponent as PlayIcon } from "./play-icon-w-32px.svg"
 import { ReactComponent as TrashIcon } from "./trash-icon-w-32px.svg"
@@ -7,13 +7,14 @@ import { ReactComponent as FileIcon } from "./file-icon-w-32px.svg"
 import "./styles.scss";
 
 interface AudioItemProps {
-    audioFile: AudioFile
+    audioFile: AudioFileWithReplacement,
+    updateReplacement: Function
 }
 
 const AudioItem: React.FC<AudioItemProps> = ({
-    audioFile
+    audioFile,
+    updateReplacement
 }) => {
-    const [replacementFile, setReplacementFile] = useState<File | null>(null);
     const inputRef: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
 
     const playAudio: Function = () => {
@@ -28,7 +29,7 @@ const AudioItem: React.FC<AudioItemProps> = ({
                 <div className="file">
                     <FileIcon />
                     <p>
-                    {audioFile.fileName} { replacementFile && <strong>{ replacementFile.name }</strong>}
+                        {audioFile.fileName} { audioFile.replacement && <strong>{ audioFile.replacement.name }</strong>}
                     </p>
                 </div>
                 <p className="description">{audioFile.description}</p>
@@ -42,12 +43,13 @@ const AudioItem: React.FC<AudioItemProps> = ({
                     <PlayIcon />
                     <span>Default</span>
                 </button>
-                { !replacementFile &&
+                { !audioFile.replacement &&
                     <button 
                         type = "button"
                         onClick={
                             () => {
-                                if (inputRef) inputRef.current?.click();
+                                if (inputRef) 
+                                    inputRef.current?.click();
                             }
                         }
                         className="button-icon"
@@ -63,25 +65,28 @@ const AudioItem: React.FC<AudioItemProps> = ({
                         (e: SyntheticEvent) => {
                             let files: FileList | null = (e.target as HTMLInputElement).files;
 
-                            setReplacementFile(files ? files[0] : null);
+                            updateReplacement(files ? files[0] : null)
+                            console.table(audioFile);
                         }
                     }
                     accept=".wav,.mp3"
                     ref={inputRef}
                 />
-                {replacementFile &&
+                {audioFile.replacement &&
                     <>
                         <button
                             type="button"
                             onClick={
                                 () => {
-                                    let fr: FileReader = new FileReader();
-                                    fr.readAsDataURL(replacementFile);
-                                    let blob: Blob = new Blob([replacementFile], { type: `application/${replacementFile.type}` });
-                                    let url: string = window.URL.createObjectURL(blob);
-
-                                    let audio: HTMLAudioElement = new Audio(url);
-                                    audio.play();
+                                    if (audioFile.replacement) {
+                                        let fr: FileReader = new FileReader();
+                                        fr.readAsDataURL(audioFile.replacement);
+                                        let blob: Blob = new Blob([audioFile.replacement], { type: `application/${audioFile.replacement.type}` });
+                                        let url: string = window.URL.createObjectURL(blob);
+    
+                                        let audio: HTMLAudioElement = new Audio(url);
+                                        audio.play();
+                                    }
                                 }
                             }
                             className="button-icon"
@@ -92,18 +97,20 @@ const AudioItem: React.FC<AudioItemProps> = ({
                         <button
                             type="button"
                             onClick={() => {
-                                let fr: FileReader = new FileReader();
-                                fr.readAsDataURL(replacementFile);
-
-                                let blob: Blob = new Blob([replacementFile], { type: "application/wav" });
-                                let url: string = window.URL.createObjectURL(blob);
-
-                                let link = document.createElement("a");
-                                link.href = url;
-                                link.download = audioFile.fileName;
-                                document.body.appendChild(link);
-                                link.click();
-                                link.remove();
+                                if (audioFile.replacement) {
+                                    let fr: FileReader = new FileReader();
+                                    fr.readAsDataURL(audioFile.replacement);
+    
+                                    let blob: Blob = new Blob([audioFile.replacement], { type: "application/wav" });
+                                    let url: string = window.URL.createObjectURL(blob);
+    
+                                    let link = document.createElement("a");
+                                    link.href = url;
+                                    link.download = audioFile.fileName;
+                                    document.body.appendChild(link);
+                                    link.click();
+                                    link.remove();
+                                }
                             }}
                             className="button-icon download"
                         >
@@ -113,7 +120,7 @@ const AudioItem: React.FC<AudioItemProps> = ({
                         <button
                             type="button"
                             onClick={() => {
-                                setReplacementFile(null);
+                                updateReplacement(null);
                                 if (inputRef && inputRef.current)
                                     inputRef.current.value = "";
                             }}

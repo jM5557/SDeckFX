@@ -1,23 +1,70 @@
 import AudioItem from './components/AudioItem'
 import Files from "./data/files.json";
-import { AudioFile } from './types';
+import { AudioFile, AudioFileWithReplacement } from './types';
 import "./app.scss";
 import SiteHeader from './components/SiteHeader';
 import JSONForm from './components/JSONForm';
 import SiteFooter from './components/SiteFooter';
+import { useState } from 'react';
+import useFiles from './hooks/useFiles';
+import { file } from 'jszip';
 
 function App() {
+  const { 
+    files,
+    handleClearAll,
+    updateReplacement,
+    containsReplacements,
+    saveAsZip,
+    zipStatus
+  } = useFiles();
+
   return (
     <div className="body">
       <SiteHeader />
       <main>
         <section className='panel audio-items'>
           <header>SFX/Audio Files</header>
-          { (Files as AudioFile[]).map(
-            (f: AudioFile) => (
+          { (containsReplacements) &&
+            <nav className='top-nav'>
+              <button
+                type = "button"
+                onClick={() => handleClearAll()}
+                className = "clear-btn"
+              >
+                Clear All
+              </button>
+
+              <button 
+                type = "button"
+                onClick={
+                  () => { 
+                    if (zipStatus === "IDLE")
+                      saveAsZip();
+                  }
+                }
+                disabled={(zipStatus === "ZIPPING")}
+                className={`button-icon download ${ (zipStatus === "ZIPPING") ? "zipping" : ""}`}
+              >
+                Download ZIP 
+                <b>
+                  { 
+                    files.filter(
+                      (f: typeof files[0]) => f.replacement !== null).length 
+                  }
+                </b>
+              </button>
+            </nav>
+          }
+          { files.map(
+            (f: AudioFileWithReplacement, index: number) => (
               <AudioItem
                 key={f.fileName}
                 audioFile={f}
+                updateReplacement={
+                  (replacement: AudioFileWithReplacement["replacement"]) => 
+                    updateReplacement(index, replacement)
+                }
               />
             ) 
           )}
