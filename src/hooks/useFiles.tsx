@@ -38,7 +38,7 @@ const useFiles = () => {
         files.map(
             (f: AudioFileWithReplacement) => {
                 if (f.replacement) {
-                    zip.file(f.replacement.name, f.replacement);
+                    zip.file(f.fileName, f.replacement);
                 }
             }
         )
