@@ -5,13 +5,14 @@ import "./app.scss";
 import SiteHeader from './components/SiteHeader';
 import JSONForm from './components/JSONForm';
 import SiteFooter from './components/SiteFooter';
-import { useState } from 'react';
+import { useState, useEffect, useRef, SyntheticEvent } from 'react';
 import useFiles from './hooks/useFiles';
 import { file } from 'jszip';
 
 function App() {
   const { 
     files,
+    setFiles,
     handleClearAll,
     updateReplacement,
     containsReplacements,
@@ -19,12 +20,57 @@ function App() {
     zipStatus
   } = useFiles();
 
+  const ref = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (ref.current !== null) {
+      ref.current.setAttribute("directory", "");
+      ref.current.setAttribute("webkitdirectory", "");
+    }
+  }, []);
+
   return (
     <div className="body">
       <SiteHeader />
       <main>
         <section className='panel audio-items'>
-          <header>SFX/Audio Files</header>
+          <header>
+            <span>
+              SFX/Audio Files
+            </span>
+
+            <button
+              onClick={
+                () => ref.current?.click()
+              }
+              className="button-icon"
+            >
+              Import from Folder
+            </button>
+            <input
+              type = "file"
+              id = "folder-input"
+              ref={ref}
+              onChange={
+                (e: SyntheticEvent) => {
+                  let val: FileList | null = (e.target as HTMLInputElement).files;
+                  let temp: typeof files = [...files];
+
+                  if (val) {
+                    Array.from(val).map((nf: File) => {
+                      temp.map((f: typeof files[0]) => {
+                        if (nf.name === f.fileName) {
+                          f.replacement = nf;
+                        }
+                      })
+                    })
+                  }
+
+                  setFiles(temp);
+                }
+              }
+            />
+          </header>
           { (containsReplacements) &&
             <nav className='top-nav'>
               <button

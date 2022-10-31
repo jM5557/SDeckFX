@@ -96,7 +96,7 @@ header, h1, h2, h3, h4, h5, h6 {
     padding: 8px 16px;
 
     & > header {
-      padding: 16px;
+      padding: 16px 0px;
     }
 
     nav.top-nav {
@@ -146,6 +146,20 @@ header, h1, h2, h3, h4, h5, h6 {
       margin-top: -128px;
       max-height: 512px;
       overflow-y: auto;
+
+      & > header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        input[type="file"] {
+          display: none;
+        }
+
+        .button-icon {
+          margin-right: 0px;
+        }
+      }
     }
 
     &.json-form {
