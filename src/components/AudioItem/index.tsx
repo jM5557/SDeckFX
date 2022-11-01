@@ -1,7 +1,7 @@
 import { RefObject, SyntheticEvent, useEffect, useRef, useState } from "react";
 import { AudioFile, AudioFileWithReplacement } from "../../types";
 import { ReactComponent as DownloadIcon } from "./download-icon-w-32px.svg"
-import { ReactComponent as PlayIcon } from "./play-icon-w-32px.svg"
+import { ReactComponent as MusicIcon } from "./music-icon-w-32px.svg"
 import { ReactComponent as TrashIcon } from "./trash-icon-w-32px.svg"
 import { ReactComponent as FileIcon } from "./file-icon-w-32px.svg"
 import "./styles.scss";
@@ -40,7 +40,7 @@ const AudioItem: React.FC<AudioItemProps> = ({
                     onClick={() => playAudio()}
                     className="button-icon"
                 >
-                    <PlayIcon />
+                    <MusicIcon />
                     <span>Default</span>
                 </button>
                 { !audioFile.replacement &&
@@ -91,7 +91,7 @@ const AudioItem: React.FC<AudioItemProps> = ({
                             }
                             className="button-icon"
                         >
-                            <PlayIcon />
+                            <MusicIcon />
                             <span>Preview</span>
                         </button>
                         <button
