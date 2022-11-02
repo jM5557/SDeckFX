@@ -1,13 +1,11 @@
 import AudioItem from './components/AudioItem'
-import Files from "./data/files.json";
-import { AudioFile, AudioFileWithReplacement } from './types';
+import { AudioFileWithReplacement } from './types';
 import "./app.scss";
 import SiteHeader from './components/SiteHeader';
 import JSONForm from './components/JSONForm';
 import SiteFooter from './components/SiteFooter';
-import { useState, useEffect, useRef, SyntheticEvent } from 'react';
+import { useEffect, useRef, SyntheticEvent } from 'react';
 import useFiles from './hooks/useFiles';
-import { file } from 'jszip';
 
 function App() {
   const { 

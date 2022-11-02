@@ -8,13 +8,21 @@
     color: #{ $bg_1 };
     margin-bottom: 32px;
 
+    .logo {
+        svg { fill: #{ $bg_1 }; }
+    }
+
     .inner {
-        h1 {
+        text-align: center;
+
+        .heading-1 {
             font-size: 2rem;
             line-height: 2rem;
+            margin-top: 32px;
+            margin-bottom: 32px;
         }
 
-        h2 {
+        .heading-2 {
             font-size: 1.5rem;
             padding-top: 16px;
         }
@@ -31,6 +39,12 @@
             margin: auto;
             padding: 32px 8px 32px;
 
+            h3 {
+                margin-bottom: 16px;
+                text-transform: uppercase;
+                letter-spacing: 1.25px;
+            }
+
             a {
                 display: inline-block;
                 padding: 12px;
@@ -43,6 +57,13 @@
                 text-decoration: none;
                 text-align: center;
                 box-shadow: 0px 0px 24px -12px #{ $bg_1 };
+                transition: transform 0.32s cubic-bezier(0.23, 1, 0.320, 1);
+
+                &:hover {
+                    transform: scale(1.05);
+                    background-color: #{ $bg_1 };
+                    color: #{ $text_1 }
+                }
             }
         }
     }

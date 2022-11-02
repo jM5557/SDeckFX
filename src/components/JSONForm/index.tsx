@@ -1,6 +1,6 @@
 import { SyntheticEvent, useState } from "react";
 import { PackJSON } from "./../../types/index";
-import { ReactComponent as DownloadIcon } from "./download-icon-w-32px.svg";
+import { ReactComponent as DownloadIcon } from "./../../assets/shared/download-icon-w-32px.svg";
 import "./styles.scss";
 
 interface JSONFormProps {}

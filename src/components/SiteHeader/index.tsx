@@ -1,5 +1,8 @@
 import "./styles.scss"
 import { ReactComponent as Logomark180px} from "./logomark-w-180px.svg";
+import { ReactComponent as DownloadIcon } from "./../../assets/shared/download-icon-w-32px.svg";
+import { ReactComponent as MusicIcon } from "./../../assets/shared/music-icon-w-32px.svg";
+import { ReactComponent as FileIcon } from "./../../assets/shared/file-icon-w-32px.svg";
 
 const SiteHeader = () => {
     return (
@@ -9,16 +12,49 @@ const SiteHeader = () => {
             </div>
             
             <div className="inner">
-                <h1>Enhance Your Steam Deck Experience</h1>
-                <h2>Customize SFX on your Steam Deck</h2>
-                <p>
-                    SDeckFX is a tool to help you customize your Steam Deck's SFX via the Audio Loader plugin for Decky. SDeckFX allows you to preview each default SFX file and then replace it with a new one of your choice (only .wav and .mp3 files are accepted)
-                    <br />
-                    <br />
-                    Once you have Decky and Audio Loader setup, and you have downloaded your new SFX file, simply create a new folder for your custom SFX pack within the path /home/deck/homebrew/sounds and drop your new SFX file inside.
-                </p>
+                <h2 className="heading-1">Customize Your Steam Deck's Sound FX</h2>
+
+                <div className="boxes">
+                    <div className="box">
+                        <div className="top-button-wrapper">
+                            <div className="top-button">
+                                <MusicIcon />
+                                <div className="bar"></div>
+                            </div>
+                        </div>
+                        <div className="text">
+                            <header>Preview</header>
+                            <h2>Default SFX</h2>
+                        </div>
+                    </div>
+                    <div className="box">
+                        <div className="top-button-wrapper">
+                            <div className="top-button">
+                                <FileIcon />
+                                <div className="bar"></div>
+                            </div>
+                        </div>
+                        <div className="text">
+                            <header>Select</header>
+                            <h2>a Custom FX File</h2>
+                        </div>
+                    </div>
+                    <div className="box">
+                        <div className="top-button-wrapper">
+                            <div className="top-button">
+                                <DownloadIcon />
+                                <div className="bar"></div>
+                            </div>
+                        </div>
+                        <div className="text">
+                            <header>Download</header>
+                            <h2>Your Deck-Ready SFX</h2>
+                        </div>
+                    </div>
+                </div>
 
                 <div className="links">
+                    <h3>Required</h3>
                     <a href="https://github.com/SteamDeckHomebrew/decky-loader" target="_blank" rel="noopener noreferrer">
                         Decky Loader
                     </a>

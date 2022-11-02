@@ -1,9 +1,9 @@
-import { RefObject, SyntheticEvent, useEffect, useRef, useState } from "react";
-import { AudioFile, AudioFileWithReplacement } from "../../types";
-import { ReactComponent as DownloadIcon } from "./download-icon-w-32px.svg"
-import { ReactComponent as MusicIcon } from "./music-icon-w-32px.svg"
-import { ReactComponent as TrashIcon } from "./trash-icon-w-32px.svg"
-import { ReactComponent as FileIcon } from "./file-icon-w-32px.svg"
+import { RefObject, SyntheticEvent, useRef } from "react";
+import { AudioFileWithReplacement } from "../../types";
+import { ReactComponent as DownloadIcon } from "./../../assets/shared/download-icon-w-32px.svg"
+import { ReactComponent as MusicIcon } from "./../../assets/shared/music-icon-w-32px.svg"
+import { ReactComponent as TrashIcon } from "./../../assets/shared/trash-icon-w-32px.svg"
+import { ReactComponent as FileIcon } from "./../../assets/shared/file-icon-w-32px.svg";
 import "./styles.scss";
 
 interface AudioItemProps {
@@ -41,7 +41,7 @@ const AudioItem: React.FC<AudioItemProps> = ({
                     className="button-icon"
                 >
                     <MusicIcon />
-                    <span>Default</span>
+                    <span>Default FX</span>
                 </button>
                 { !audioFile.replacement &&
                     <button 
@@ -55,7 +55,7 @@ const AudioItem: React.FC<AudioItemProps> = ({
                         className="button-icon"
                     >
                         <FileIcon />
-                        <span>Replace File</span>
+                        <span>Select</span>
                     </button>
                 }
                 <input
@@ -66,7 +66,6 @@ const AudioItem: React.FC<AudioItemProps> = ({
                             let files: FileList | null = (e.target as HTMLInputElement).files;
 
                             updateReplacement(files ? files[0] : null)
-                            console.table(audioFile);
                         }
                     }
                     accept=".wav,.mp3"
@@ -92,7 +91,7 @@ const AudioItem: React.FC<AudioItemProps> = ({
                             className="button-icon"
                         >
                             <MusicIcon />
-                            <span>Preview</span>
+                            <span>Custom FX</span>
                         </button>
                         <button
                             type="button"
