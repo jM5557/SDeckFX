@@ -16,4 +16,10 @@ export type PackJSON = {
     mappings: {}
 }
 
-export type AudioFileWithReplacement = AudioFile & { replacement: File | null };
+export type SFXPack = {
+    id: string,
+    packJSON: PackJSON,
+    files: AudioFileWithCustom[]
+}
+
+export type AudioFileWithCustom = AudioFile & { replacement: File | null };

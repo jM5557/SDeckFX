@@ -1,0 +1,372 @@
+@import "./../../variables.scss";
+
+.sfx-pack-preview {
+    padding: 16px;
+    background-color: #{ $color_2 };
+    border-radius: 4px;
+    cursor: pointer;
+    animation: zoomIn 0.32s forwards 1 cubic-bezier(0.19, 1, 0.22, 1);
+    margin-bottom: 8px;
+
+    &:hover {
+        opacity: 0.65;
+    }
+
+
+    &.selected {
+        border: solid 2px #{ $accent_1 };
+    }
+
+    .name {
+        font-size: 0.90rem;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .description {
+        font-size: small;
+        padding: 16px 8px;
+    }
+
+    .author {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .view {
+        padding: 6px 32px;
+        background-color: #{ $accent_1 };
+        border: none;
+        border-radius: 4px;
+        color: #{ $color_2 };
+        font-size: small;
+        font-family: #{ $headerFont };
+        flex: 1 1;
+    }
+
+    .button-icon-only {
+        margin-right: 0px;
+        margin-left: 16px;
+        padding: 4px;
+
+        svg {
+            fill: #{ $text_1 };
+        }
+    }
+
+    .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 8px;
+
+        button, .button-icon-only {
+            transition: opacity 0.32s cubic-bezier(0.19, 1, 0.22, 1);
+
+            &:hover {
+                opacity: 0.65
+            }
+        }
+    }
+}
+
+.sfx-pack-track {
+    display: flex;
+    align-items: space-between;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 0px;
+
+    .default-name {
+        font-weight: 500;
+    }
+
+    .file-icon {
+        width: 24px;
+        height: 24px;
+        path { fill: #{ $text_2 }; }
+    }
+
+    .details {
+        margin-left: 16px;
+        margin-right: auto;
+    }
+
+    .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .replacement {
+        background-color: #{ $color_2 };
+        font-size: 0.80rem;
+        color: #{ $text_2 };
+        padding: 2px 16px;
+        border-radius: 500px;
+        display: inline-block;
+        margin-top: 8px;
+
+        max-width: 320px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        b {
+            color: #{ $accent_1 };
+            display: inline-block;
+            margin-right: 8px;
+        }
+    }
+
+    .audio {
+        border-radius: 4px;
+        position: relative;
+        display: block;
+        padding: 4px;
+        margin-right: 8px;
+
+        svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        span {
+            display: block;
+            margin-top: -4px;
+            background-color: #{ $color_2 };
+            font-size: 0.80rem;
+            color: #{ $text_1 };
+            padding: 2px 12px;
+            border-radius: 500px;
+        }
+
+        &.custom {
+            span {
+                background-color: #{ $accent_1 };
+                color: #{ $bg_1 };
+            }
+        }
+    }
+
+    .download {
+        background-color: #{ $accent_1 };
+        margin-right: 8px;
+        border-radius: 4px;
+
+        svg {
+            width: 32px;
+            height: 32px;
+
+            path {
+                fill: #{ $bg_1 };
+            }
+        }
+    }
+
+    .browse-btn {
+        background-color: transparent;
+        border: solid thin #{ $color_2 };
+        padding: 8px 16px;
+        border-radius: 500px;
+        color: #{ $text_2 };
+        font-size: small;
+    }
+
+    @media all and (max-width: 900px) {
+        flex-flow: column wrap;
+        padding: 20px 0px;
+
+        .file-icon {
+            display: none;
+        }
+
+        .buttons {
+            justify-content: flex-start;
+            margin-top: 8px;
+
+            .browse-btn {
+                margin-right: 0px;
+                margin-left: auto;
+            }
+        }
+    }
+}
+
+.sfx-pack {
+    width: 100%;
+    padding: 0px 16px;
+
+    .top {
+        padding: 16px 0px;
+
+        .bottom-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-top: 16px;
+    
+            .buttons {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 0px;
+    
+                button {
+                    flex: 1 1;
+                    white-space: nowrap;
+                }
+
+                .import {
+                    padding-left: 32px;
+                    padding-right: 32px;
+                }
+
+                .clear-all {
+                    background-color: transparent;
+                    color: #{ $text_2 };
+                    transition: opacity 0.32s cubic-bezier(0.19, 1, 0.22, 1);
+
+                    &:hover {
+                        opacity: 0.65 !important;
+                    }
+                }
+
+                .download {
+                    background-color: #{ $accent_1 };
+                    border-radius: 4px;
+
+                    svg path {
+                        fill: #{ $bg_1 };
+                    }
+                }
+            }
+
+            @media all and (max-width: 1080px) {
+                flex-flow: column;
+                align-items: stretch;
+                justify-content: center;
+
+                .buttons {
+                    padding-top: 8px;
+                    align-items: stretch;
+
+                    .download {
+                        margin-right: 0px;
+                    }
+                }
+            }
+        }
+    }
+
+    .sfx-pack-name {
+        font-size: 2rem;
+        font-family: #{ $headerFont };
+        overflow-wrap: break-word;
+    }
+
+    .sfx-pack-author {
+        color: #{ $text_2 };
+        padding: 12px 0px;
+        max-width: 45%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .sfx-pack-count {
+        margin-left: 8px;
+        font-family: $headerFont;
+        color: $text_2;
+        background-color: $color_2;
+        display: inline-block;
+        padding: 4px 12px;
+        font-size: small;
+        border-radius: 500px;
+
+        b {
+            color: $accent_1;
+            margin-right: 16px;
+        }
+    }
+
+    .sfx-pack-description {
+        padding: 8px 16px 16px;
+        border-radius: 4px;
+        background-color: #{ $color_2 };
+        display: table;
+
+        b {
+            font-size: small;
+            display: table;
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+.empty {
+    flex: 1 1;
+    text-align: center;
+    font-family: #{ $headerFont };
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.downloads {
+    .inner-content {
+        p {
+            padding: 0px 0px 16px;
+        }
+    }
+    .buttons {
+        display: block;
+        margin-bottom: -8px;
+        
+        button {
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            width: 100%;
+            margin-bottom: 8px;
+            transition: opacity 0.32s cubic-bezier(0.19, 1, 0.22, 1);
+            animation: none;
+
+            svg {
+                margin-right: 0px;
+            }
+
+            &:hover {
+                opacity: 0.65;
+            }
+
+            &:active {
+                transform: none;
+            }
+        }
+    }
+}

@@ -1,5 +1,5 @@
 import { RefObject, SyntheticEvent, useRef } from "react";
-import { AudioFileWithReplacement } from "../../types";
+import { AudioFileWithCustom } from "../../types";
 import { ReactComponent as DownloadIcon } from "./../../assets/shared/download-icon-w-32px.svg"
 import { ReactComponent as MusicIcon } from "./../../assets/shared/music-icon-w-32px.svg"
 import { ReactComponent as TrashIcon } from "./../../assets/shared/trash-icon-w-32px.svg"
@@ -7,7 +7,7 @@ import { ReactComponent as FileIcon } from "./../../assets/shared/file-icon-w-32
 import "./styles.scss";
 
 interface AudioItemProps {
-    audioFile: AudioFileWithReplacement,
+    audioFile: AudioFileWithCustom,
     updateReplacement: Function
 }
 

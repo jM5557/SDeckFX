@@ -81,8 +81,12 @@ body {
     font-family: $bodyFont;
 }
 
-header, h1, h2, h3, h4, h5, h6 {
+header, h1, h2, h3, h4, h5, h6, button {
     font-family: $headerFont;
+}
+
+button {
+  cursor: pointer;
 }
 
 .panel {
@@ -334,10 +338,11 @@ header, h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 16px;
+  padding: 8px 16px;
   background-color: #{$color_2};
   color: #{$text_1};
   border-radius: 4px;
+  font-size: 0.90rem;
   font-family: #{$headerFont};
   border: none;
   margin-right: 8px;
@@ -446,11 +451,72 @@ header, h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.editor {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+
+  .sidebar {
+    width: 320px;
+    margin-top: 0px;
+    position: sticky;
+    top: 0px;
+    padding: 16px;
+  }
+
+  .editor-body {
+    flex: 1 1;
+  }
+
+  @media all and (max-width: 900px) {
+    flex-flow: column nowrap;
+    align-items: stretch;
+    justify-content: center;
+    max-width: 720px;
+    margin: auto;
+
+    .sidebar {
+      width: 100%;
+      position: relative;
+    }
+  }
+}
+
 @keyframes slideDown {
   from {
     max-height: 0;
   }
   to {
     max-height: 100px;
+  }
+}
+
+.modal {
+  padding: 16px;
+  background-color: $color_1;
+  border-radius: 8px;
+  margin-right: auto;
+  width: 90vw;
+  max-width: 480px;
+
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: solid thin $color_2;
+    padding: 0px 0px 16px;
+    margin-bottom: 16px;
+
+    button {
+      background-color: transparent;
+      color: $text_2;
+      border: none;
+      font-weight: 500;
+      transition: opacity 0.32s cubic-bezier(0.19, 1, 0.22, 1);
+
+      &:hover {
+          opacity: 0.65;
+      }
+    }
   }
 }

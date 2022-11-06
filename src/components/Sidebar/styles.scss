@@ -1,0 +1,57 @@
+@import "./../../variables.scss";
+
+.sidebar {
+    max-height: 100vh;
+    overflow-y: auto;
+
+    .action-btn {
+        flex: 1 1;
+
+        transition: opacity 0.32s cubic-bezier(0.19, 1, 0.22, 1);
+        
+        &:hover {
+            opacity: 0.65;
+        }
+
+        &:nth-of-type(1) {
+            margin-right: 8px;
+        }
+
+        &.create {
+            background-color: $accent_1;
+            color: $color_2;
+        }
+    }
+
+    @media all and (max-width: 900px) {
+        max-height: 480px;
+    }
+}
+
+.action-btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 16px;
+}
+
+.action-btn {
+    display: block;
+    background-color: #{ $color_2 };
+    color: #{ $text_2 };
+    width: 100%;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 4px;
+}
+
+.json-form-wrapper {
+    transition: max-height 0.48s cubic-bezier(0.19, 1, 0.22, 1);
+    max-height: 0;
+    overflow: hidden;
+    
+    &.visible {
+        border-top: solid thin #{ $color_2 };
+        max-height: 500px;
+    }
+}

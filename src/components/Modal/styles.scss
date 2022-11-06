@@ -1,0 +1,37 @@
+.modal-wrapper {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        background-color: #111;
+        z-index: 1;
+        animation: fadeIn 0.64s forwards 1 cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .content {
+        position: relative;
+        z-index: 2;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
