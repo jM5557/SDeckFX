@@ -17,6 +17,16 @@
         border: solid 2px #{ $accent_1 };
     }
 
+    .pack-type {
+        display: inline-block;
+        background-color: $bg_1;
+        font-size: small;
+        font-weight: 600;
+        border-radius: 500px;
+        padding: 2px 12px;
+        margin-bottom: 8px;
+    }
+
     .name {
         font-size: 0.90rem;
         width: 100%;
@@ -271,6 +281,16 @@
         font-size: 2rem;
         font-family: #{ $headerFont };
         overflow-wrap: break-word;
+
+        span {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: small;
+            background-color: $color_2;
+            padding: 8px 16px;
+            border-radius: 500px;
+            margin-left: 8px;
+        }
     }
 
     .sfx-pack-author {

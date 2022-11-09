@@ -11,7 +11,7 @@ export type PackJSON = {
     author: string,
     version: string,
     manifest_version: number,
-    music: false,
+    music: boolean,
     ignore: [],
     mappings: {}
 }

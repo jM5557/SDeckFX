@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { SFXItemsContext } from "../../context/SFXItems";
 import { AudioFileWithCustom, SFXPack as SFXPackProps } from "../../types";
-import { generatePackZip, generatePackZipMusicOnly, playAudio } from "../../util/helpers";
+import { downloadCustomSFX, generatePackZip, generatePackZipMusicOnly, playAudio } from "../../util/helpers";
 import FileSelect from "./fileSelect";
 import { ReactComponent as MusicIcon } from "./../../assets/shared/music-icon-w-32px.svg";
 import { ReactComponent as DownloadIcon } from "./../../assets/shared/download-icon-w-32px.svg";
@@ -24,7 +24,10 @@ const SFXPack: React.FC = (): JSX.Element => {
         <div className="sfx-pack">
             <div className="top">
                 <header className="sfx-pack-name">
-                    { currentPack.packJSON.name }
+                    { currentPack.packJSON.name } 
+                    <span>
+                        { currentPack.packJSON.music ? "UI Music" : "UI SFX" }
+                    </span>
                 </header>
                 <div className="top-inner x-start">
                     <span className="sfx-pack-author">
@@ -59,9 +62,7 @@ const SFXPack: React.FC = (): JSX.Element => {
                         <button
                             type = "button"
                             onClick={
-                                () => {
-                                    setDisplayDownloads(true)
-                                }
+                                () => setDisplayDownloads(true)
                             }
                             className="button-icon download"
                         >
@@ -72,7 +73,9 @@ const SFXPack: React.FC = (): JSX.Element => {
                 </div>
             </div>
             { (displayDownloads) &&
-                <Modal>
+                <Modal
+                    handleClose={ () => setDisplayDownloads(false) }
+                >
                     <div className="modal downloads">
                         <header className="top">
                             <span>Download SFX Pack</span>
@@ -161,13 +164,15 @@ const SFXPack: React.FC = (): JSX.Element => {
                                     }
                                 </div>
                                 <div className="buttons">
-                                    <button
-                                        onClick={() => playAudio(`./../../assets/audio/sounds/${f.fileName}`)}
-                                        className="button-icon-only audio"
-                                    >
-                                        <MusicIcon />
-                                        <span>Default</span>
-                                    </button>
+                                    { (f.title.length > 0) &&
+                                        <button
+                                            onClick={() => playAudio(`./../../assets/audio/sounds/${f.fileName}`)}
+                                            className="button-icon-only audio"
+                                        >
+                                            <MusicIcon />
+                                            <span>Default</span>
+                                        </button>
+                                    }
 
                                     { (f.replacement) &&
                                         <>
@@ -182,7 +187,9 @@ const SFXPack: React.FC = (): JSX.Element => {
                                             <button
                                                 type = "button"
                                                 className="button-icon-only download"
-                                                onClick={() => {}}
+                                                onClick={() => {
+                                                    downloadCustomSFX(f.fileName, f.replacement as File)
+                                                }}
                                             >
                                                 <DownloadIcon />
                                                 <span>Download Track</span>
@@ -190,20 +197,23 @@ const SFXPack: React.FC = (): JSX.Element => {
                                         </>
                                     }
                                     
-                                    <FileSelect 
-                                        callbackFn={
-                                            (file: File) => {
-                                                dispatch({
-                                                    type: 'ADD_REPLACEMENT',
-                                                    payload: {
-                                                        fileName: f.fileName,
-                                                        file
-                                                    }
-                                                })
+                                    { (currentPack && currentPack.packJSON) &&
+                                        <FileSelect 
+                                            callbackFn={
+                                                (file: File) => {
+                                                    dispatch({
+                                                        type: 'ADD_REPLACEMENT',
+                                                        payload: {
+                                                            fileName: f.fileName,
+                                                            file
+                                                        }
+                                                    })
+                                                }
                                             }
-                                        }
-                                        className = "browse-btn"
-                                    />
+                                            isMusic = {currentPack.packJSON.music}
+                                            className = "browse-btn"
+                                        />
+                                    }
 
                                     { (f.replacement) &&
                                         <button

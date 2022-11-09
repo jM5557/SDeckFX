@@ -28,17 +28,41 @@
         margin-bottom: 16px;
 
         b {
-            font-family: #{ $headerFont };
+            font-family: $headerFont;
             display: table;
             color: #{ $accent_1 };
             margin-bottom: 4px;
         }
 
         input[type="text"], textarea {
-            background-color: #{ $color_2 };
-            color: #{ $text_1 };
+            background-color: $color_2;
+            color: $text_1;
             border: none;
             padding: 8px;
+        }
+    }
+
+    .pack-type {
+        padding: 0px 0px;
+        margin-bottom: 16px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        b {
+            font-family: $headerFont;
+            display: table;
+            color: $accent_1;
+            margin-right: 8px;
+        }
+
+        .button-icon {
+            flex: 1 1;
+            
+            &:nth-of-type(2) {
+                margin-right: auto;
+            }
         }
     }
 

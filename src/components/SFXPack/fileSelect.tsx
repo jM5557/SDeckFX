@@ -2,11 +2,13 @@ import { RefObject, SyntheticEvent, useRef } from "react"
 
 type FileSelectProps = {
     callbackFn: Function,
+    isMusic: boolean,
     className?: string
 }
 
 const FileSelect: React.FC<FileSelectProps> = ({
     callbackFn,
+    isMusic = false,
     className
 }): JSX.Element => {
     const ref: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
@@ -25,7 +27,7 @@ const FileSelect: React.FC<FileSelectProps> = ({
                 type="file"
                 style = {{ display: "none" }}
                 ref = { ref }
-                accept=".wav,.mp3"
+                accept={ isMusic ? ".mp3" : ".wav,.mp3" }
                 onChange = {
                     (e: SyntheticEvent) => {
                         let files: FileList | null = (e.target as HTMLInputElement).files;

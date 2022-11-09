@@ -32,6 +32,7 @@ export const Preview: React.FC<PreviewProps> = ({
                 }
             }
         >
+            <span className="pack-type">{ packJSON.music ? "UI Music" : "UI SFX"}</span>
             <header className="name">{ packJSON.name }</header>
             <small className="author">
                 Created by { packJSON.author }

@@ -2,6 +2,7 @@ import { RefObject, SyntheticEvent, useContext, useEffect, useRef } from "react"
 import { SFXItemsContext } from "../../context/SFXItems";
 import { PackJSON } from "../../types";
 import { loadPackJSON } from "../../util/helpers";
+import { ReactComponent as FolderIcon } from "./../../assets/shared/folder-icon-w-32px.svg";
 
 interface FolderSelectProps {
     className?: string,
@@ -39,7 +40,10 @@ const FolderSelect: React.FC<FolderSelectProps> = ({
                 }
                 className={ `${ className ?? "" }` }
             >
-                Import
+                <FolderIcon />
+                <span>
+                    Import    
+                </span>
             </button>
             <input
                 type = "file"
@@ -58,7 +62,8 @@ const FolderSelect: React.FC<FolderSelectProps> = ({
                                         ? {
                                             name: packJSON.name,
                                             description: packJSON.description,
-                                            author: packJSON.author
+                                            author: packJSON.author,
+                                            music: packJSON.music
                                         }
                                         : null
                                 });

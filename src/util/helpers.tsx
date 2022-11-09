@@ -64,7 +64,6 @@ export const loadPackJSON = async (files: FileList): Promise<PackJSON | null> =>
             }
         }
 
-        console.log(pack);
         return pack;
     }
     catch (error) {
@@ -99,12 +98,7 @@ export const generatePackZip = async (pack: PackJSON, files: AudioFileWithCustom
     let zipBlob: Blob = await zip.generateAsync({ type: "blob" });
     let url: string = window.URL.createObjectURL(zipBlob);
 
-    let link = document.createElement("a");
-    link.href = url;
-    link.download = "SDeckFX.zip";
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
+    initiateDownload(url, "SDeckFX.zip");
 }
 
 export const generatePackZipMusicOnly = async (files: AudioFileWithCustom[]) => {

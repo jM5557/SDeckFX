@@ -365,18 +365,22 @@ button {
   }
 
   &.download {
-      background-color: #{ $accent_1 };
-      color: #{ $bg_1 };
+      background-color: $accent_1;
+      color: $bg_1;
       transition: opacity 0.32s cubic-bezier(0.23, 1, 0.320, 1);
       
       svg path {
-        fill: #{ $bg_1 };
+        fill: $bg_1;
       }
       
       &.zipping {
         pointer-events: none;
         opacity: 0.5 !important;
       }
+  }
+
+  &.selected {
+    border: solid 3px $accent_1;
   }
 }
 
@@ -466,6 +470,7 @@ button {
 
   .editor-body {
     flex: 1 1;
+    margin-top: 0px;
   }
 
   @media all and (max-width: 900px) {

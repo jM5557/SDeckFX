@@ -14,6 +14,20 @@ export const defaultPackJSON: PackJSON = {
     mappings: {}
 };
 
+let defaultMusicPack: Function = (id?:string, packJSON?: PackJSON) => ({
+    id: id ?? uuidv4(),
+    packJSON: {
+        ...packJSON,
+        music: true
+    },
+    files: [{ 
+        title: "",
+        description: "Background Music",
+        fileName: "menu_music.mp3",
+        format: "mp3"
+    }]
+})
+
 let defaultSFXPack: Function = (id?:string, packJSON?: PackJSON) => ({
     id: id ?? uuidv4(),
     packJSON: packJSON ?? defaultPackJSON,
@@ -28,7 +42,7 @@ export type Action = {
     }
 } | {
     type: 'ADD_SFX_PACK',
-    payload: Pick<PackJSON, "name" | "author" | "description"> | null
+    payload: Pick<PackJSON, "name" | "author" | "description" | "music"> | null
 } | {
     type: 'DELETE_REPLACEMENT',
     payload: string
@@ -102,7 +116,11 @@ const reducer = (
                 currentId: id,
                 sfxPacks: [
                     ...state.sfxPacks,
-                    defaultSFXPack(id, action.payload)
+                    (
+                        (action.payload?.music) 
+                            ? defaultMusicPack(id, action.payload)  
+                            : defaultSFXPack(id, action.payload)
+                    )
                 ]
             }
         case 'DELETE_SFX_PACK': {

@@ -24,7 +24,9 @@ const SiteHeader = () => {
             </button>
 
             { (displayRequirements) &&
-                <Modal>
+                <Modal
+                    handleClose={() => setDisplayRequirements(false) }
+                >
                     <div className="modal installation">
                         <div className="top">
                             <header>

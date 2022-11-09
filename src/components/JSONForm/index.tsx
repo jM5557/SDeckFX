@@ -42,7 +42,8 @@ const JSONForm: React.FC<JSONFormProps> = ({ children, hideForm }) => {
                 ...defaultPackJSON,
                 name: packJSON.name.trim(),
                 author: packJSON.author.trim(),
-                description: packJSON.description.trim()
+                description: packJSON.description.trim(),
+                music: packJSON.music
             }
         });
 
@@ -111,6 +112,37 @@ const JSONForm: React.FC<JSONFormProps> = ({ children, hideForm }) => {
                             }
                         />
                     </label>
+                    <div className="pack-type">
+                        <b>Pack Type</b>
+                        <button
+                            type = "button"
+                            onClick={
+                                () => {
+                                    setPackJSON({
+                                        ...packJSON,
+                                        music: true
+                                    })
+                                }
+                            }
+                            className={`button-icon ${ packJSON.music ? "selected" : "" }`}
+                        >
+                            UI Music
+                        </button>
+                        <button
+                            type = "button"
+                            onClick={
+                                () => {
+                                    setPackJSON({
+                                        ...packJSON,
+                                        music: false
+                                    })
+                                }
+                            }
+                            className={`button-icon ${ packJSON.music ? "" : "selected" }`}
+                        >
+                            UI SFX
+                        </button>
+                    </div>
                 </div>
 
                 { (packJSON.name.length > 0 

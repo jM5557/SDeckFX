@@ -17,11 +17,11 @@ const Sidebar: React.FC<SidebarProps> = () => {
         <aside className="sidebar">
             <div className="action-btns">
                 <FolderSelect
-                    className="action-btn"
+                    className="button-icon"
                     isNewPack={ true }
                 />
                 <button 
-                    className="action-btn create"
+                    className="button-icon download"
                     onClick={
                         () => setDisplayJSONForm(!displayJSONForm)
                     }
@@ -31,7 +31,9 @@ const Sidebar: React.FC<SidebarProps> = () => {
             </div>
             
             { (displayJSONForm) &&
-                <Modal>
+                <Modal
+                    handleClose={ () => setDisplayJSONForm(false) }
+                >
                     <div className="modal">
                         <header className="top">
                             <span>
