@@ -8,6 +8,7 @@
         button {
             flex: 1 1;
             transition: opacity 0.32s cubic-bezier(0.19, 1, 0.22, 1);
+            margin-right: 0px;
             
             &:hover {
                 opacity: 0.65;
@@ -21,6 +22,20 @@
 
     @media all and (max-width: 900px) {
         max-height: 480px;
+
+        .previews-list {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-flow: row wrap;
+            gap: 16px;
+
+            .sfx-pack-preview {
+                width: 48%;
+                flex: 1 1;
+                margin-bottom: auto;
+            }
+        }
     }
 }
 

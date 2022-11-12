@@ -410,10 +410,6 @@ button {
   }
 }
 
-.button-icon, .button-icon-only {
-  animation: fadeIn 0.48s cubic-bezier(0.23, 1, 0.320, 1) forwards 1;
-}
-
 @keyframes fadeIn {
   from {
       opacity: 0;

@@ -73,22 +73,64 @@ const Track: React.FC<TrackProps> = ({
             key={f.fileName}
             className="sfx-pack-track"
         >
-            <FileIcon className="file-icon" />
             <div className="details">
                 <header className="default-name">
-                    {f.fileName}
+                    <FileIcon className="file-icon" /> {f.fileName}
                 </header>
 
                 {(f.replacement) &&
                     <div className="replacement">
-                        <b>Custom</b>
-                        <div className="replacement-details">
-                            <span className="replacement-detail name">
-                                { f.replacement.name }
-                            </span>
-                            <span className="replacement-detail">
-                                { fileSizeToString(f.replacement.size) }
-                            </span>
+                        <div className="replacement-inner">
+                            <div>
+                                <b>Custom</b>
+                                <div className="replacement-details">
+                                    <span className="replacement-detail replacement-name">
+                                        { f.replacement.name }
+                                    </span>
+                                    <span className="replacement-detail">
+                                        { fileSizeToString(f.replacement.size) }
+                                    </span>
+                                </div>
+                            </div>    
+                            {(f.replacement) &&
+                                <div className="replacement-buttons">
+                                    <button
+                                        onClick={() => playCustomAudio()}
+                                        className={`button-icon-only ${ isPlaying ? "playing" : "" }`}
+                                    >
+                                        <MusicIcon />
+                                        <span>Preview</span>
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        className="button-icon-only download"
+                                        onClick={() => {
+                                            downloadCustomSFX(f.fileName, f.replacement as File, f.format)
+                                        }}
+                                    >
+                                        <DownloadIcon />
+                                        <span>Download Track</span>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={
+                                            () => {
+                                                audio.current = null;
+                                                setIsPlaying(false);
+                                                dispatch({
+                                                    type: "DELETE_REPLACEMENT",
+                                                    payload: f.fileName
+                                                })
+                                            }
+                                        }
+                                        className="button-icon-only"
+                                    >
+                                        <TrashIcon />
+                                        <span>Delete</span>
+                                    </button>
+                                </div>
+                            }
                         </div>
                     </div>
                 }
@@ -102,29 +144,6 @@ const Track: React.FC<TrackProps> = ({
                         <MusicIcon />
                         <span>Default</span>
                     </button>
-                }
-
-                {(f.replacement) &&
-                    <>
-                        <button
-                            onClick={() => playCustomAudio()}
-                            className={`button-icon-only audio custom ${ isPlaying ? "playing" : "" }`}
-                        >
-                            <MusicIcon />
-                            <span>Custom</span>
-                        </button>
-
-                        <button
-                            type="button"
-                            className="button-icon-only download"
-                            onClick={() => {
-                                downloadCustomSFX(f.fileName, f.replacement as File, f.format)
-                            }}
-                        >
-                            <DownloadIcon />
-                            <span>Download Track</span>
-                        </button>
-                    </>
                 }
 
                 {(currentPack && currentPack.packJSON) &&
@@ -144,26 +163,6 @@ const Track: React.FC<TrackProps> = ({
                         isMusic={currentPack.packJSON.music}
                         className="browse-btn"
                     />
-                }
-
-                {(f.replacement) &&
-                    <button
-                        type="button"
-                        onClick={
-                            () => {
-                                audio.current = null;
-                                setIsPlaying(false);
-                                dispatch({
-                                    type: "DELETE_REPLACEMENT",
-                                    payload: f.fileName
-                                })
-                            }
-                        }
-                        className="button-icon-only"
-                    >
-                        <TrashIcon />
-                        <span>Delete</span>
-                    </button>
                 }
             </div>
         </div>

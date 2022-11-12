@@ -38,6 +38,20 @@ export const Preview: React.FC<PreviewProps> = ({
                 Created by { packJSON.author }
             </small>
             <div className="buttons">
+                <button 
+                    type = "button"
+                    onClick={
+                        () => {
+                            dispatch({
+                                type: 'DELETE_SFX_PACK',
+                                payload: id
+                            })
+                        }
+                    }
+                    className="button-icon delete"
+                >
+                    <span>Delete</span>
+                </button>
                 <button
                     type = "button"
                     onClick={
@@ -51,21 +65,6 @@ export const Preview: React.FC<PreviewProps> = ({
                     className = "view"
                 >
                     View
-                </button>
-                <button 
-                    type = "button"
-                    onClick={
-                        () => {
-                            dispatch({
-                                type: 'DELETE_SFX_PACK',
-                                payload: id
-                            })
-                        }
-                    }
-                    className="button-icon-only"
-                >
-                    <TrashIcon />
-                    <span>Delete</span>
                 </button>
             </div>
         </div>

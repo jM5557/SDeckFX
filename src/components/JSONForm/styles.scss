@@ -72,6 +72,10 @@
         justify-content: space-between;
 
         button {
+            svg {
+                width: 18px;
+                height: 18px;
+            }
             &.download {
                 flex: 1 1;
                 margin-right: 0px;

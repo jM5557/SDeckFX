@@ -8,11 +8,6 @@
     animation: zoomIn 0.32s forwards 1 cubic-bezier(0.19, 1, 0.22, 1);
     margin-bottom: 8px;
 
-    &:hover {
-        opacity: 0.65;
-    }
-
-
     &.selected {
         border: solid 2px #{ $accent_1 };
     }
@@ -52,14 +47,21 @@
     }
 
     .view {
-        padding: 6px 32px;
+        padding: 10px 24px;
         background-color: #{ $accent_1 };
         border: none;
-        border-radius: 4px;
+        border-radius: 8px;
         color: #{ $color_2 };
         font-size: small;
         font-family: #{ $headerFont };
         flex: 1 1;
+        max-width: 160px;
+    }
+
+    .delete {
+        font-family: $bodyFont;
+        font-weight: normal;
+        color: $text_2;
     }
 
     .button-icon-only {
@@ -75,7 +77,7 @@
     .buttons {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-end;
         margin-top: 8px;
 
         button, .button-icon-only {
@@ -96,17 +98,19 @@
     padding: 16px 0px;
 
     .default-name {
-        font-weight: 500;
+        font-family: $bodyFont;
     }
 
     .file-icon {
         width: 24px;
         height: 24px;
         path { fill: #{ $text_2 }; }
+        margin-right: 8px;
+        display: inline-block;
+        vertical-align: middle;
     }
 
     .details {
-        margin-left: 16px;
         margin-right: auto;
     }
 
@@ -120,15 +124,57 @@
         background-color: #{ $color_2 };
         font-size: 0.80rem;
         color: #{ $text_2 };
-        padding: 2px 16px;
+        padding: 8px 16px;
         border-radius: 8px;
         display: inline-block;
         margin-top: 8px;
 
-        max-width: 320px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+        .replacement-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .replacement-buttons {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .button-icon-only {
+                width: 48px;
+                height: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 4px;
+                margin-right: 0px;
+            }
+
+            .button-icon-only:nth-of-type(1) {
+                margin-left: 8px;
+            }
+
+            .playing {
+                opacity: 0.35 !important;
+            }
+
+            .download {
+                background-color: transparent;
+
+                svg {
+                    width: 24px;
+                    height: 24px;
+                }
+
+                svg path {
+                    fill: $accent_1;
+                }
+            }
+
+            button:hover {
+                background-color: $color_1;
+            }
+        }
 
         b {
             color: #{ $accent_1 };
@@ -138,6 +184,14 @@
 
         .replacement-detail {
             display: table;
+
+            &.replacement-name {
+                width: 180px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                display: block;
+            }
         }
     }
 
@@ -156,55 +210,36 @@
         span {
             display: block;
             margin-top: -4px;
-            background-color: #{ $color_2 };
+            background-color: $color_2;
             font-size: 0.80rem;
-            color: #{ $text_1 };
+            font-family: $bodyFont;
+            color: $text_1;
             padding: 2px 12px;
             border-radius: 500px;
-        }
-
-        &.custom {
-            span {
-                background-color: #{ $accent_1 };
-                color: #{ $bg_1 };
-            }
-
-            &.playing {
-                opacity: 0.5 !important;
-            }
-        }
-    }
-
-    .download {
-        background-color: #{ $accent_1 };
-        margin-right: 8px;
-        border-radius: 4px;
-
-        svg {
-            width: 32px;
-            height: 32px;
-
-            path {
-                fill: #{ $bg_1 };
-            }
         }
     }
 
     .browse-btn {
         background-color: transparent;
         border: solid thin #{ $color_2 };
-        padding: 8px 16px;
+        padding: 8px 32px;
         border-radius: 500px;
         color: #{ $text_2 };
         font-size: small;
     }
 
-    @media all and (max-width: 900px) {
+    @media all and (max-width: 640px) {
         flex-flow: column wrap;
         padding: 20px 0px;
 
-        .file-icon {
-            display: none;
+        .details {
+            flex: 1 1;
+            margin-right: 0px;
+
+            .replacement {
+                width: 100%;
+                display: block;
+            }
         }
 
         .buttons {
@@ -214,6 +249,8 @@
             .browse-btn {
                 margin-right: 0px;
                 margin-left: auto;
+                padding-left: 32px;
+                padding-right: 32px;
             }
         }
     }
@@ -250,7 +287,7 @@
 
                 .clear-all {
                     background-color: transparent;
-                    color: #{ $text_2 };
+                    color: $text_2;
                     transition: opacity 0.32s cubic-bezier(0.19, 1, 0.22, 1);
 
                     &:hover {
@@ -259,11 +296,17 @@
                 }
 
                 .download {
-                    background-color: #{ $accent_1 };
+                    background-color: $accent_1;
                     border-radius: 4px;
+                    margin-right: 0px;
+
+                    svg {
+                        width: 16px;
+                        height: 16px;
+                    }
 
                     svg path {
-                        fill: #{ $bg_1 };
+                        fill: $bg_1;
                     }
                 }
             }
@@ -276,9 +319,13 @@
                 .buttons {
                     padding-top: 8px;
                     align-items: stretch;
+                }
+            }
 
-                    .download {
-                        margin-right: 0px;
+            @media all and (max-width: 720px) {
+                .buttons {
+                    button.clear-all {
+                        flex: unset;
                     }
                 }
             }
