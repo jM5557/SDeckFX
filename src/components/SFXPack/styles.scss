@@ -121,7 +121,7 @@
         font-size: 0.80rem;
         color: #{ $text_2 };
         padding: 2px 16px;
-        border-radius: 500px;
+        border-radius: 8px;
         display: inline-block;
         margin-top: 8px;
 
@@ -134,6 +134,10 @@
             color: #{ $accent_1 };
             display: inline-block;
             margin-right: 8px;
+        }
+
+        .replacement-detail {
+            display: table;
         }
     }
 
@@ -163,6 +167,10 @@
             span {
                 background-color: #{ $accent_1 };
                 color: #{ $bg_1 };
+            }
+
+            &.playing {
+                opacity: 0.5 !important;
             }
         }
     }

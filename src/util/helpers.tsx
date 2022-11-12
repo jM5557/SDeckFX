@@ -1,4 +1,4 @@
-import JSZip from "jszip";
+import JSZip, { file } from "jszip";
 import { defaultPackJSON } from "../context/SFXItems";
 import { AudioFileWithCustom, PackJSON } from "../types";
 import filesList from "./../data/files.json";
@@ -123,11 +123,11 @@ export const generatePackZipMusicOnly = async (files: AudioFileWithCustom[]) => 
     link.remove();
 }
 
-export const downloadCustomSFX = (fileName: string, custom: File) => {
+export const downloadCustomSFX = (fileName: string, custom: File, format: string = "wav") => {
     let fr: FileReader = new FileReader();
     fr.readAsDataURL(custom);
 
-    let blob: Blob = new Blob([fileName], { type: "application/wav" });
+    let blob: Blob = new Blob([custom], { type: `application/${ format}` });
     let url: string = window.URL.createObjectURL(blob);
 
     let link = document.createElement("a");
@@ -136,4 +136,19 @@ export const downloadCustomSFX = (fileName: string, custom: File) => {
     document.body.appendChild(link);
     link.click();
     link.remove();
+}
+
+
+export const fileSizeToString: Function = (bytes: number, decimals: number = 2): string => {
+    if (!+bytes) return '0 Bytes'
+
+    const k = 1024
+    const dm = (decimals < 0) 
+        ? 0 
+        : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+
+    const i = Math.floor(Math.log(bytes) / Math.log(k))
+
+    return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
 }

@@ -9,6 +9,7 @@ import { ReactComponent as TrashIcon } from "./../../assets/shared/trash-icon-w-
 import { ReactComponent as FileIcon } from "./../../assets/shared/file-icon-w-32px.svg";
 import FolderSelect from "./folderSelect";
 import Modal from "../Modal";
+import Track from "./track";
 
  
 const SFXPack: React.FC = (): JSX.Element => {
@@ -147,93 +148,11 @@ const SFXPack: React.FC = (): JSX.Element => {
                 <div className="sfx-pack-files">
                     {
                         currentPack.files.map((f: AudioFileWithCustom) => (
-                            <div
-                                key = {f.fileName}
-                                className = "sfx-pack-track"
-                            >
-                                <FileIcon className="file-icon" />
-                                <div className="details">
-                                    <header className="default-name">
-                                        { f.fileName }
-                                    </header>
-                                    
-                                    { (f.replacement) &&
-                                        <p className="replacement">
-                                            <b>Custom</b> { f.replacement.name }
-                                        </p>
-                                    }
-                                </div>
-                                <div className="buttons">
-                                    { (f.title.length > 0) &&
-                                        <button
-                                            onClick={() => playAudio(`./../../assets/audio/sounds/${f.fileName}`)}
-                                            className="button-icon-only audio"
-                                        >
-                                            <MusicIcon />
-                                            <span>Default</span>
-                                        </button>
-                                    }
-
-                                    { (f.replacement) &&
-                                        <>
-                                            <button
-                                                onClick={() => playAudio(f.replacement as File)}
-                                                className="button-icon-only audio custom"
-                                            >
-                                                <MusicIcon />
-                                                <span>Custom</span>
-                                            </button>
-
-                                            <button
-                                                type = "button"
-                                                className="button-icon-only download"
-                                                onClick={() => {
-                                                    downloadCustomSFX(f.fileName, f.replacement as File)
-                                                }}
-                                            >
-                                                <DownloadIcon />
-                                                <span>Download Track</span>
-                                            </button>
-                                        </>
-                                    }
-                                    
-                                    { (currentPack && currentPack.packJSON) &&
-                                        <FileSelect 
-                                            callbackFn={
-                                                (file: File) => {
-                                                    dispatch({
-                                                        type: 'ADD_REPLACEMENT',
-                                                        payload: {
-                                                            fileName: f.fileName,
-                                                            file
-                                                        }
-                                                    })
-                                                }
-                                            }
-                                            isMusic = {currentPack.packJSON.music}
-                                            className = "browse-btn"
-                                        />
-                                    }
-
-                                    { (f.replacement) &&
-                                        <button
-                                            type = "button"
-                                            onClick={
-                                                () => {
-                                                    dispatch({
-                                                        type: "DELETE_REPLACEMENT",
-                                                        payload: f.fileName
-                                                    })
-                                                }
-                                            }
-                                            className = "button-icon-only"
-                                        >
-                                            <TrashIcon />
-                                            <span>Delete</span>
-                                        </button>
-                                    }
-                                </div>
-                            </div>
+                            <Track
+                                key = { f.fileName }
+                                f = { f }
+                                currentPack = { currentPack }
+                            />
                         ))
                     }
                 </div>
