@@ -1,12 +1,8 @@
 import { useContext, useState } from "react";
 import { SFXItemsContext } from "../../context/SFXItems";
 import { AudioFileWithCustom, SFXPack as SFXPackProps } from "../../types";
-import { downloadCustomSFX, generatePackZip, generatePackZipMusicOnly, playAudio } from "../../util/helpers";
-import FileSelect from "./fileSelect";
-import { ReactComponent as MusicIcon } from "./../../assets/shared/music-icon-w-32px.svg";
+import { generatePackZip, generatePackZipMusicOnly, getPackJSON, initiateDownload } from "../../util/helpers";
 import { ReactComponent as DownloadIcon } from "./../../assets/shared/download-icon-w-32px.svg";
-import { ReactComponent as TrashIcon } from "./../../assets/shared/trash-icon-w-32px.svg";
-import { ReactComponent as FileIcon } from "./../../assets/shared/file-icon-w-32px.svg";
 import FolderSelect from "./folderSelect";
 import Modal from "../Modal";
 import Track from "./track";
@@ -35,7 +31,11 @@ const SFXPack: React.FC = (): JSX.Element => {
                         Created by { currentPack.packJSON.author }
                     </span>
                     <span className="sfx-pack-count">
-                        <b>Custom Tracks</b> { currentPack.files.filter((f: AudioFileWithCustom) => f.replacement !== null).length }
+                        <b>Custom Tracks</b> { 
+                            currentPack.files.filter(
+                                (f: AudioFileWithCustom) => f.replacement && f.replacement.length > 0
+                            ).length
+                        }
                     </span>
                 </div>
                 <div className="bottom-row">
@@ -111,14 +111,9 @@ const SFXPack: React.FC = (): JSX.Element => {
                                     onClick = {
                                         () => {
                                             if (currentPack) {
-                                                let data: string = `text/json;charset=utf-8,${ encodeURIComponent(JSON.stringify(currentPack?.packJSON)) }`;
-    
-                                                let link = document.createElement("a");
-                                                link.href = `data:${ data }`;
-                                                link.download = 'pack.json';
-                                                document.body.appendChild(link);
-                                                link.click();
-                                                link.remove();
+                                                let data: string = `text/json;charset=utf-8,${ encodeURIComponent(JSON.stringify(getPackJSON(currentPack?.packJSON, currentPack.files))) }`;
+                                                
+                                                initiateDownload(`data:${ data }`, 'pack.json');
                                             }
                                         }
                                     }
@@ -144,14 +139,14 @@ const SFXPack: React.FC = (): JSX.Element => {
                     </div>
                 </Modal>
             }
-            { (currentPack.files.length > 0) &&
+            { (currentPack && currentPack.files.length > 0) &&
                 <div className="sfx-pack-files">
                     {
                         currentPack.files.map((f: AudioFileWithCustom) => (
                             <Track
                                 key = { f.fileName }
                                 f = { f }
-                                currentPack = { currentPack }
+                                currentPack = { currentPack as SFXPackProps }
                             />
                         ))
                     }

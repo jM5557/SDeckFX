@@ -13,7 +13,7 @@ export type PackJSON = {
     manifest_version: number,
     music: boolean,
     ignore: [],
-    mappings: {}
+    mappings: any
 }
 
 export type SFXPack = {
@@ -22,4 +22,4 @@ export type SFXPack = {
     files: AudioFileWithCustom[]
 }
 
-export type AudioFileWithCustom = AudioFile & { replacement: File | null };
+export type AudioFileWithCustom = AudioFile & { replacement: File[] | null };

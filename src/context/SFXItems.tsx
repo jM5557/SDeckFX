@@ -24,28 +24,32 @@ let defaultMusicPack: Function = (id?:string, packJSON?: PackJSON) => ({
         title: "",
         description: "Background Music",
         fileName: "menu_music.mp3",
-        format: "mp3"
+        format: "mp3",
+        replacement: []
     }]
 })
 
 let defaultSFXPack: Function = (id?:string, packJSON?: PackJSON) => ({
     id: id ?? uuidv4(),
     packJSON: packJSON ?? defaultPackJSON,
-    files: (Files as AudioFile[]).map((f: AudioFile) => { return { ...f, replacement: null } })
+    files: (Files as AudioFile[]).map((f: AudioFile) => { return { ...f, replacement: [] } })
 });
 
 export type Action = {
     type: 'ADD_REPLACEMENT',
     payload: {
         fileName: string,
-        file: File | null
+        file: File[]
     }
 } | {
     type: 'ADD_SFX_PACK',
-    payload: Pick<PackJSON, "name" | "author" | "description" | "music"> | null
+    payload: Pick<PackJSON, "name" | "author" | "description" | "music" | "mappings"> | null
 } | {
     type: 'DELETE_REPLACEMENT',
-    payload: string
+    payload: {
+        track: string,
+        replacementTrack: string
+    }
 } | {
     type: 'DELETE_SFX_PACK',
     payload: string
@@ -86,8 +90,10 @@ const reducer = (
             
             if (itemIndex === -1) return state;
             
-            let file = packs[index].files[itemIndex];
-            file.replacement = action.payload.file;
+            let replacement = packs[index].files[itemIndex].replacement;
+            replacement = [...(replacement ?? []), ...action.payload.file];
+
+            packs[index].files[itemIndex].replacement = replacement;
 
             return {
                 ...state,
@@ -99,11 +105,18 @@ const reducer = (
 
             if (index === -1) return state;
 
-            let itemIndex = packs[index].files.findIndex((f: AudioFileWithCustom) => f.fileName === action.payload)
+            let itemIndex = packs[index].files.findIndex((f: AudioFileWithCustom) => f.fileName === action.payload.track)
             
             if (itemIndex === -1) return state;
 
-            packs[index].files[itemIndex].replacement = null;
+            let replacement = packs[index].files[itemIndex].replacement;
+            if (replacement)
+                replacement = replacement.filter(
+                    (r: File) => {
+                        return r.name !== action.payload.replacementTrack
+                    }
+                );
+            packs[index].files[itemIndex].replacement = replacement;
 
             return {
                 ...state,
@@ -161,14 +174,36 @@ const reducer = (
             if (index === -1) return state;
 
             if (action.payload) {
-                Array.from(action.payload).map(
-                    (nf: File | null) => {
-                        packs[index].files.map(
-                            (f: AudioFileWithCustom) => {
-                                if (f.fileName === nf?.name)
-                                    f.replacement = nf;
+                let { mappings } = packs[index].packJSON;
+
+                console.log(mappings);
+                
+                packs[index].files = packs[index].files.map(
+                    (t: AudioFileWithCustom) => {
+                        let replacements: File[] = [];
+                        
+                        (action.payload ?? []).map(
+                            (f: File | null) => {
+                                if (f) {
+                                    if (mappings.hasOwnProperty(t.fileName)) {
+                                        mappings[t.fileName].map(
+                                            (v: string) => {
+                                                if (f.name === v) {
+                                                    replacements.push(f);
+                                                }
+                                            }
+                                        )
+                                    } else {
+                                        if (f.name === t.fileName) {
+                                            replacements.push(f);
+                                        }
+                                    }
+                                }
                             }
-                        );
+                        )
+
+                        t.replacement = replacements;
+                        return t;
                     }
                 )
             }

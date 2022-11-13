@@ -57,7 +57,9 @@ export const loadPackJSON = async (files: FileList): Promise<PackJSON | null> =>
                     ...defaultPackJSON,
                     name: obj.name ?? defaultPackJSON.name,
                     author: obj.author ?? defaultPackJSON.author,
-                    description: obj.description ?? defaultPackJSON.description
+                    description: obj.description ?? defaultPackJSON.description,
+                    music: obj.music ?? defaultPackJSON.music,
+                    mappings: obj.mappings ?? defaultPackJSON.mappings
                 }
 
                 break;
@@ -75,16 +77,46 @@ export const loadPackJSON = async (files: FileList): Promise<PackJSON | null> =>
 export const generatePackZip = async (pack: PackJSON, files: AudioFileWithCustom[]) => {
     let zip: JSZip = new JSZip();
 
+    getPackZipMusic(zip, files);
+    getPackZipJSON(zip, files, pack);
+
+    let zipBlob: Blob = await zip.generateAsync({ type: "blob" });
+    let url: string = window.URL.createObjectURL(zipBlob);
+
+    initiateDownload(url, `${ pack.name }.zip`);
+}
+
+export const getPackJSON = (pack: PackJSON, files: AudioFileWithCustom[]) => {
     files.map(
         (f: AudioFileWithCustom) => {
             if (f.replacement) {
-                zip.file(f.fileName, f.replacement);
+                let values: string[] = [];
+                let len = f.replacement.length;
+                f.replacement.map(
+                    (r: File) => {
+                        if (len > 1) {
+                            values.push(r.name);
+                        }
+                    }
+                )
+                if (values.length > 0)
+                    pack.mappings[f.fileName] = values;
             }
         }
     )
-    
+
+    return pack;
+}
+
+export const getPackZipJSON = async (
+    zip: JSZip, 
+    files: AudioFileWithCustom[], 
+    pack: PackJSON
+) => {
+    let p: typeof pack = getPackJSON(pack, files);
+
     let blob = new Blob(
-        [JSON.stringify(pack, null, 2)], 
+        [JSON.stringify(p, null, 2)], 
         {type: "application/json",}
     );
     let jsonFile = new File(
@@ -94,33 +126,33 @@ export const generatePackZip = async (pack: PackJSON, files: AudioFileWithCustom
     );
 
     zip.file("pack.json", jsonFile);
+}
 
-    let zipBlob: Blob = await zip.generateAsync({ type: "blob" });
-    let url: string = window.URL.createObjectURL(zipBlob);
-
-    initiateDownload(url, "SDeckFX.zip");
+export const getPackZipMusic = async (zip: JSZip, files: AudioFileWithCustom[]) => {
+    files.map(
+        (f: AudioFileWithCustom) => {
+            if (f.replacement) {
+                let len = f.replacement.length;
+                f.replacement.map(
+                    (r: File) => zip.file(
+                        (len > 1 ? r.name : f.fileName), 
+                        r
+                    )
+                )
+            }
+        }
+    )
 }
 
 export const generatePackZipMusicOnly = async (files: AudioFileWithCustom[]) => {
     let zip: JSZip = new JSZip();
 
-    files.map(
-        (f: AudioFileWithCustom) => {
-            if (f.replacement) {
-                zip.file(f.fileName, f.replacement);
-            }
-        }
-    )
+    getPackZipMusic(zip, files);
 
     let zipBlob: Blob = await zip.generateAsync({ type: "blob" });
     let url: string = window.URL.createObjectURL(zipBlob);
-
-    let link = document.createElement("a");
-    link.href = url;
-    link.download = "SDeckFX.zip";
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
+    
+    initiateDownload(url, "SDeckFX.zip");
 }
 
 export const downloadCustomSFX = (fileName: string, custom: File, format: string = "wav") => {
@@ -130,12 +162,7 @@ export const downloadCustomSFX = (fileName: string, custom: File, format: string
     let blob: Blob = new Blob([custom], { type: `application/${ format}` });
     let url: string = window.URL.createObjectURL(blob);
 
-    let link = document.createElement("a");
-    link.href = url;
-    link.download = fileName;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
+    initiateDownload(url, fileName);
 }
 
 

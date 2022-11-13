@@ -50,7 +50,6 @@ const FolderSelect: React.FC<FolderSelectProps> = ({
                 onChange = {
                     async (e: SyntheticEvent) => {
                         let files: FileList | null = (e.target as HTMLInputElement).files;
-                        console.log(files);
 
                         if (files) {
                             if (isNewPack) {
@@ -63,11 +62,13 @@ const FolderSelect: React.FC<FolderSelectProps> = ({
                                             name: packJSON.name,
                                             description: packJSON.description,
                                             author: packJSON.author,
-                                            music: packJSON.music
+                                            music: packJSON.music,
+                                            mappings: packJSON.mappings
                                         }
                                         : null
                                 });
                             }
+
                             dispatch({
                                 type: "SET_ALL_REPLACEMENTS",
                                 payload: Array.from(files)

@@ -91,11 +91,39 @@
 }
 
 .sfx-pack-track {
-    display: flex;
-    align-items: space-between;
-    justify-content: space-between;
     width: 100%;
     padding: 16px 0px;
+
+    .sfx-pack-track-top {
+        display: flex;
+        align-items: space-between;
+        justify-content: space-between;
+    }
+
+    .replacements-list {
+        margin-right: -16px;
+        max-width: 1280px;
+
+        @media all and (max-width: 900px) {
+            margin-right: auto;
+        }
+
+        .replacement {
+            display: inline-block;
+            margin-right: 8px;
+            width: calc(33% - 8px);
+
+            @media all and (max-width: 1200px) {
+                width: calc(50% - 8px);
+            }
+            
+            @media all and (max-width: 900px) {
+                width: 100%;
+                margin: auto auto 8px;
+                display: block;
+            }
+        }
+    }
 
     .default-name {
         font-family: $bodyFont;
@@ -121,9 +149,9 @@
     }
 
     .replacement {
-        background-color: #{ $color_2 };
+        background-color: $color_2;
         font-size: 0.80rem;
-        color: #{ $text_2 };
+        color: $text_2;
         padding: 8px 16px;
         border-radius: 8px;
         display: inline-block;
@@ -133,6 +161,12 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+
+            & > div:nth-of-type(1) {
+                flex: 1 1;
+                position: relative;
+                width: 50%;
+            }
 
             .replacement-buttons {
                 display: flex;
@@ -186,11 +220,11 @@
             display: table;
 
             &.replacement-name {
-                width: 180px;
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 display: block;
+                max-width: unset;
             }
         }
     }
@@ -232,6 +266,15 @@
         flex-flow: column wrap;
         padding: 20px 0px;
 
+        .default-name {
+            font-size: 0.85rem;
+
+            svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+
         .details {
             flex: 1 1;
             margin-right: 0px;
@@ -252,10 +295,13 @@
                 }
             }
         }
+        
+        .sfx-pack-track-top {
+            margin-bottom: 8px;
+        }
 
         .buttons {
             justify-content: flex-start;
-            margin-top: 8px;
 
             .browse-btn {
                 margin-right: 0px;

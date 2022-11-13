@@ -33,7 +33,7 @@ const FileSelect: React.FC<FileSelectProps> = ({
                         let files: FileList | null = (e.target as HTMLInputElement).files;
 
                         if (files && Array.from(files).length > 0) {
-                            callbackFn(files[0]);
+                            callbackFn(Array.from(files));
                         }
                     }
                 }
@@ -42,6 +42,7 @@ const FileSelect: React.FC<FileSelectProps> = ({
                         (e.target as HTMLInputElement).value = "";
                     }
                 }
+                multiple
             />
         </>
     )

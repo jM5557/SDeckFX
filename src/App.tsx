@@ -1,5 +1,3 @@
-import AudioItem from './components/AudioItem'
-import { AudioFileWithCustom } from './types';
 import "./app.scss";
 import SiteHeader from './components/SiteHeader';
 import JSONForm from './components/JSONForm';
