@@ -268,6 +268,10 @@
 
         .default-name {
             font-size: 0.85rem;
+            max-width: 50vw;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
 
             svg {
                 width: 16px;
@@ -306,8 +310,9 @@
             .browse-btn {
                 margin-right: 0px;
                 margin-left: auto;
-                padding-left: 32px;
-                padding-right: 32px;
+                padding-left: 16px;
+                padding-right: 16px;
+                font-size: x-small;
             }
         }
     }

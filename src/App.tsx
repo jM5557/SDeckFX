@@ -1,6 +1,5 @@
 import "./app.scss";
 import SiteHeader from './components/SiteHeader';
-import JSONForm from './components/JSONForm';
 import SiteFooter from './components/SiteFooter';
 import { useEffect, useRef, SyntheticEvent, useContext } from 'react';
 import { SFXItemsProvider } from './context/SFXItems';
