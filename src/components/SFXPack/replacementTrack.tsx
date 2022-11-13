@@ -63,8 +63,6 @@ const ReplacementTrack: React.FC<ReplacementTrackProps> = ({
                 setIsPlaying(false);
             }
         }
-
-        console.log(isPlaying);
     }
 
     return (
@@ -104,6 +102,7 @@ const ReplacementTrack: React.FC<ReplacementTrackProps> = ({
                         type="button"
                         onClick={
                             () => {
+                                audio?.current?.pause();
                                 audio.current = null;
                                 setIsPlaying(false);
                                 dispatch({

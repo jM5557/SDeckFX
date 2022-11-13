@@ -175,8 +175,6 @@ const reducer = (
 
             if (action.payload) {
                 let { mappings } = packs[index].packJSON;
-
-                console.log(mappings);
                 
                 packs[index].files = packs[index].files.map(
                     (t: AudioFileWithCustom) => {

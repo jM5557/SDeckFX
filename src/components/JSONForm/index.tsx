@@ -105,7 +105,6 @@ const JSONForm: React.FC<JSONFormProps> = ({ children, hideForm }) => {
                                         ...packJSON,
                                         description: (e.target as HTMLInputElement)
                                             .value
-                                            .trim()
                                             .slice(0, 240)
                                     })
                                 }
