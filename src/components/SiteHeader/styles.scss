@@ -1,14 +1,18 @@
 @import "./../../variables.scss";
 
 .site-header {
-    padding: 16px;
+    padding: 8px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: solid thin $color_2;
 
     .logo {
-        svg { fill: $bg_1; }
+        svg { 
+            fill: $bg_1; 
+            width: 128px;
+            height: 48px;
+        }
     }
 
     button {

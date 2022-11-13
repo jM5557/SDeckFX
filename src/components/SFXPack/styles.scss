@@ -137,7 +137,7 @@
             .replacement-buttons {
                 display: flex;
                 align-items: center;
-                justify-content: center;
+                justify-content: flex-end;
             }
 
             .button-icon-only {
@@ -177,7 +177,7 @@
         }
 
         b {
-            color: #{ $accent_1 };
+            color: $accent_1;
             display: inline-block;
             margin-right: 8px;
         }
@@ -221,10 +221,10 @@
 
     .browse-btn {
         background-color: transparent;
-        border: solid thin #{ $color_2 };
+        border: solid thin $color_2;
         padding: 8px 32px;
         border-radius: 500px;
-        color: #{ $text_2 };
+        color: $text_2;
         font-size: small;
     }
 
@@ -235,10 +235,21 @@
         .details {
             flex: 1 1;
             margin-right: 0px;
+        }
 
-            .replacement {
-                width: 100%;
-                display: block;
+        .replacement {
+            width: 100%;
+            display: block;
+            
+            .replacement-inner > div, .replacement-buttons {
+                flex: 1 1;
+            }
+
+            .replacement-details {
+                .replacement-name {
+                    max-width: 32vw;
+                    width: auto;
+                }
             }
         }
 
@@ -274,6 +285,7 @@
                 align-items: center;
                 justify-content: center;
                 margin-top: 0px;
+                flex-flow: row wrap;
     
                 button {
                     flex: 1 1;
@@ -329,11 +341,20 @@
                     }
                 }
             }
+
+            @media all and (max-width: 402px) {
+                .buttons {
+                    .download {
+                        margin-top: 8px;
+                    }
+                }
+            }
         }
     }
 
     .sfx-pack-name {
         font-size: 2rem;
+        line-height: 2.5rem;
         font-family: #{ $headerFont };
         overflow-wrap: break-word;
 
@@ -345,6 +366,7 @@
             padding: 8px 16px;
             border-radius: 500px;
             margin-left: 8px;
+            line-height: 1rem;
         }
     }
 
