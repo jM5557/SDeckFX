@@ -1,18 +1,26 @@
-import { useContext, useState } from "react";
-import { SFXItemsContext } from "../../context/SFXItems";
+import { useContext, useEffect, useState } from "react";
+import { AppState, SFXItemsContext } from "../../context/SFXItems";
 import { AudioFileWithCustom, SFXPack as SFXPackProps } from "../../types";
 import { generatePackZip, generatePackZipMusicOnly, getPackJSON, initiateDownload } from "../../util/helpers";
 import { ReactComponent as DownloadIcon } from "./../../assets/shared/download-icon-w-32px.svg";
+import { ReactComponent as EditIcon } from "./../../assets/shared/edit-icon-w-32px.svg";
 import FolderSelect from "./folderSelect";
 import Modal from "../Modal";
 import Track from "./track";
+import JSONForm from "../JSONForm";
 
- 
+let initialPack = (state: AppState) => state.sfxPacks.find((f: SFXPackProps) => f.id === state.currentId);
 const SFXPack: React.FC = (): JSX.Element => {
     let { state, dispatch } = useContext(SFXItemsContext);
-    const [displayDownloads, setDisplayDownloads] = useState<boolean>(false);
 
-    let currentPack = state.sfxPacks.find((f: SFXPackProps) => f.id === state.currentId);
+    const [displayDownloads, setDisplayDownloads] = useState<boolean>(false);
+    const [displayJSONForm, setDisplayJSONForm] = useState<boolean>(false);
+
+    let [currentPack, setCurrentPack] = useState<SFXPackProps | undefined>(initialPack(state));
+
+    useEffect(() => {
+        setCurrentPack(state.sfxPacks.find((f: SFXPackProps) => f.id === state.currentId));
+    }, [initialPack(state)])
 
     if (!currentPack || typeof currentPack === undefined)
         return (<div className="empty">Select a SFX Pack to Edit</div>);
@@ -37,6 +45,10 @@ const SFXPack: React.FC = (): JSX.Element => {
                             ).length
                         }
                     </span>
+                    <button className="button-icon" onClick={() => setDisplayJSONForm(true)}>
+                        <EditIcon />
+                        <span>Edit</span>
+                    </button>
                 </div>
                 <div className="bottom-row">
                     <div className="sfx-pack-description">
@@ -136,6 +148,30 @@ const SFXPack: React.FC = (): JSX.Element => {
                                 </button>
                             </div>
                         </div>
+                    </div>
+                </Modal>
+            }
+            { (displayJSONForm) &&
+                <Modal
+                    handleClose={ () => setDisplayJSONForm(false) }
+                >
+                    <div className="modal">
+                        <header className="top">
+                            <span>
+                                Edit SFX Pack
+                            </span>
+                            <button
+                                type = "button"
+                                onClick={() => setDisplayJSONForm(false)}
+                            >
+                                Cancel
+                            </button>
+                        </header>
+                        <JSONForm 
+                            hideForm={() => setDisplayJSONForm(false)}
+                            formType="EDIT"
+                            defaultPackJSON={currentPack.packJSON}
+                        />
                     </div>
                 </Modal>
             }

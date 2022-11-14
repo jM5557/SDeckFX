@@ -51,6 +51,9 @@ export type Action = {
         replacementTrack: string
     }
 } | {
+    type: 'EDIT_SFX_PACK',
+    payload: Pick<PackJSON, "name" | "author" | "description">
+} | {
     type: 'DELETE_SFX_PACK',
     payload: string
 } | {
@@ -136,6 +139,25 @@ const reducer = (
                     )
                 ]
             }
+        case 'EDIT_SFX_PACK': {
+            let packs = [...state.sfxPacks];
+            let index = packs.findIndex((p: SFXPack) => p.id === state.currentId)
+            
+            if (index === -1) return state;
+            
+            packs[index] = {
+                ...packs[index],
+                packJSON: {
+                    ...packs[index].packJSON,
+                    ...action.payload
+                }
+            }
+
+            return {
+                ...state,
+                sfxPacks: packs
+            }
+        }
         case 'DELETE_SFX_PACK': {
             let packs = [...state.sfxPacks];
             let filteredPacks = packs.filter((p: SFXPack) => p.id !== action.payload)

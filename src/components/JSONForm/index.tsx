@@ -1,12 +1,15 @@
 import { ReactNode, SyntheticEvent, useContext, useState } from "react";
-import { PackJSON } from "./../../types/index";
+import { PackJSON, SFXPack } from "./../../types/index";
 import { ReactComponent as DownloadIcon } from "./../../assets/shared/download-icon-w-32px.svg";
 import "./styles.scss";
 import { defaultPackJSON, SFXItemsContext } from "../../context/SFXItems";
+import { initiateDownload } from "../../util/helpers";
 
 interface JSONFormProps {
     children?: ReactNode,
-    hideForm?: Function
+    hideForm?: Function,
+    formType: "CREATE" | "EDIT",
+    defaultPackJSON?: PackJSON
 }
 
 let defaultPackJSONSettings: PackJSON = {
@@ -19,35 +22,44 @@ let defaultPackJSONSettings: PackJSON = {
     ignore: [],
     mappings: {}
 }
-const JSONForm: React.FC<JSONFormProps> = ({ children, hideForm }) => {
-    const  { dispatch } = useContext(SFXItemsContext);
+const JSONForm: React.FC<JSONFormProps> = ({ 
+    children, 
+    hideForm, 
+    formType = "CREATE",
+    defaultPackJSON = defaultPackJSONSettings 
+}) => {
+    const  { state, dispatch } = useContext(SFXItemsContext);
 
-    const [packJSON, setPackJSON] = useState<PackJSON>(defaultPackJSONSettings)
+    const [packJSON, setPackJSON] = useState<PackJSON>(defaultPackJSON)
     
     const handleDownload: Function = () => {
         let data: string = `text/json;charset=utf-8,${ encodeURIComponent(JSON.stringify(packJSON)) }`;
 
-        let link = document.createElement("a");
-        link.href = `data:${ data }`;
-        link.download = 'pack.json';
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
+        initiateDownload(`data:${ data }`, 'pack.json');
     }
 
     const handleSubmit = () => {
-        dispatch({
-            type: 'ADD_SFX_PACK',
-            payload: {
-                ...defaultPackJSON,
-                name: packJSON.name.trim(),
-                author: packJSON.author.trim(),
-                description: packJSON.description.trim(),
-                music: packJSON.music
-            }
-        });
-
-        setPackJSON(defaultPackJSON);
+        if (formType === "EDIT") {
+            dispatch({
+                type: "EDIT_SFX_PACK",
+                payload: {
+                    name: packJSON.name.trim(),
+                    author: packJSON.author.trim(),
+                    description: packJSON.description.trim(),
+                }
+            })
+        } else if (formType === "CREATE") {
+            dispatch({
+                type: 'ADD_SFX_PACK',
+                payload: {
+                    ...defaultPackJSON,
+                    name: packJSON.name.trim(),
+                    author: packJSON.author.trim(),
+                    description: packJSON.description.trim(),
+                    music: packJSON.music
+                }
+            });
+        }
     }
     return (
         <div className="json-form">
@@ -111,37 +123,39 @@ const JSONForm: React.FC<JSONFormProps> = ({ children, hideForm }) => {
                             }
                         />
                     </label>
-                    <div className="pack-type">
-                        <b>Pack Type</b>
-                        <button
-                            type = "button"
-                            onClick={
-                                () => {
-                                    setPackJSON({
-                                        ...packJSON,
-                                        music: true
-                                    })
+                    { (formType === "CREATE") &&
+                        <div className="pack-type">
+                            <b>Pack Type</b>
+                            <button
+                                type = "button"
+                                onClick={
+                                    () => {
+                                        setPackJSON({
+                                            ...packJSON,
+                                            music: true
+                                        })
+                                    }
                                 }
-                            }
-                            className={`button-icon ${ packJSON.music ? "selected" : "" }`}
-                        >
-                            UI Music
-                        </button>
-                        <button
-                            type = "button"
-                            onClick={
-                                () => {
-                                    setPackJSON({
-                                        ...packJSON,
-                                        music: false
-                                    })
+                                className={`button-icon ${ packJSON.music ? "selected" : "" }`}
+                            >
+                                UI Music
+                            </button>
+                            <button
+                                type = "button"
+                                onClick={
+                                    () => {
+                                        setPackJSON({
+                                            ...packJSON,
+                                            music: false
+                                        })
+                                    }
                                 }
-                            }
-                            className={`button-icon ${ packJSON.music ? "" : "selected" }`}
-                        >
-                            UI SFX
-                        </button>
-                    </div>
+                                className={`button-icon ${ packJSON.music ? "" : "selected" }`}
+                            >
+                                UI SFX
+                            </button>
+                        </div>
+                    }
                 </div>
 
                 { (packJSON.name.length > 0 
@@ -177,7 +191,7 @@ const JSONForm: React.FC<JSONFormProps> = ({ children, hideForm }) => {
                             }
                             className = "button-icon download"
                         >
-                            <span>Create</span>
+                            <span>Submit</span>
                         </button>
                     </div>
                 }                            

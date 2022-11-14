@@ -48,6 +48,7 @@ const Sidebar: React.FC<SidebarProps> = () => {
                         </header>
                         <JSONForm 
                             hideForm={() => setDisplayJSONForm(false)}
+                            formType="CREATE"
                         />
                     </div>
                 </Modal>
