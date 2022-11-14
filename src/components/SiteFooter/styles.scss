@@ -8,33 +8,13 @@
         text-align: left;
         margin: auto;
 
-        .link {
-            padding: 8px 0px;
+        .links {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
 
             b {
-                margin-right: 24px;
-                font-family: #{ $headerFont };
-            }
-
-            a {
-                color: #{ $accent_1 };
-                text-decoration: none;
-            }
-
-            @media all and (max-width: 640px) {
-                display: block;
-
-                b {
-                    margin-right: auto;
-                    margin-bottom: 8px;
-                }
-
-                a {
-                    display: table;
-                }
+                margin-right: 8px;
             }
         }
     }

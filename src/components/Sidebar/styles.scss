@@ -26,14 +26,19 @@
         .previews-list {
             display: flex;
             align-items: center;
-            justify-content: center;
-            flex-flow: row wrap;
+            justify-content: flex-start;
+            flex-flow: row nowrap;
             gap: 16px;
+            overflow-x: auto;
+            padding-bottom: 16px;
+            scroll-snap-type: x mandatory;
 
             .sfx-pack-preview {
-                width: 48%;
+                max-width: 270px;
+                min-width: 270px;
                 flex: 1 1;
                 margin-bottom: auto;
+                scroll-snap-align: start;
             }
         }
     }

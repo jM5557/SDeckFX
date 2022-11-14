@@ -48,7 +48,7 @@ const SFXPack: React.FC = (): JSX.Element => {
                             className="button-icon import"
                         />
 
-                        { (currentPack.files.filter((f: AudioFileWithCustom) => f.replacement !== null).length > 0) &&
+                        { (currentPack.files.filter((f: AudioFileWithCustom) => (f.replacement ?? []).length > 0).length > 0) &&
                             <button
                                 type="button"
                                 onClick={() => dispatch({
