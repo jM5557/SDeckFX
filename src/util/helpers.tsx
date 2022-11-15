@@ -179,3 +179,12 @@ export const fileSizeToString: Function = (bytes: number, decimals: number = 2):
 
     return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
 }
+
+export const formatSeconds = (seconds: number) => {
+    let minutes: number = Math.floor(seconds / 60);
+    let min: string = (minutes >= 10) ? "" + minutes : "0" + minutes;
+
+    let adjustedSeconds = Math.floor(seconds % 60);
+    let sec: string = (adjustedSeconds >= 10) ? "" + adjustedSeconds : "0" + adjustedSeconds;
+    return min + ":" + sec;
+  }

@@ -227,6 +227,43 @@
                 max-width: unset;
             }
         }
+
+        .replacement-progress-bar {
+            display: block;
+        }
+
+        .progress-bar-wrapper {
+            background-color: $color_1;
+            position: relative;
+            max-width: 240px;
+            border-radius: 2px;
+            cursor: pointer;
+
+            .thumb {
+                position: absolute;
+                top: -2px;
+                width: 8px;
+                background-color: $text_1;
+                bottom: -2px;
+                pointer-events: none;
+                transition: left 0.32s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.32s cubic-bezier(0.19, 1, 0.22, 1);
+                border-radius: 2px;
+                opacity: 0;
+            }
+
+            &:hover {
+                .thumb {
+                    opacity: 1;
+                }
+            }
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: $accent_1;
+            transition: width 0.32s cubic-bezier(0.19, 1, 0.22, 1);
+            border-radius: 2px;
+        }
     }
 
     .audio {
@@ -260,6 +297,12 @@
         border-radius: 500px;
         color: $text_2;
         font-size: small;
+    }
+
+    @media all and (max-width: 900px) {
+        .sfx-pack-track-top {
+            margin-bottom: 8px;
+        }
     }
 
     @media all and (max-width: 640px) {
@@ -297,11 +340,11 @@
                     max-width: 32vw;
                     width: auto;
                 }
+
+                .replacement-progress-bar {
+                    width: 100%;
+                }
             }
-        }
-        
-        .sfx-pack-track-top {
-            margin-bottom: 8px;
         }
 
         .buttons {
