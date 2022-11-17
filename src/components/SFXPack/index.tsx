@@ -9,7 +9,9 @@ import Modal from "../Modal";
 import Track from "./track";
 import JSONForm from "../JSONForm";
 
-let initialPack = (state: AppState) => state.sfxPacks.find((f: SFXPackProps) => f.id === state.currentId);
+let initialPack = (state: AppState) => state.sfxPacks.find(
+    (f: SFXPackProps) => f.id === state.currentId
+);
 const SFXPack: React.FC = (): JSX.Element => {
     let { state, dispatch } = useContext(SFXItemsContext);
 
@@ -19,11 +21,19 @@ const SFXPack: React.FC = (): JSX.Element => {
     let [currentPack, setCurrentPack] = useState<SFXPackProps | undefined>(initialPack(state));
 
     useEffect(() => {
-        setCurrentPack(state.sfxPacks.find((f: SFXPackProps) => f.id === state.currentId));
+        setCurrentPack(
+            state.sfxPacks.find(
+                (f: SFXPackProps) => f.id === state.currentId
+            )
+        );
     }, [initialPack(state)])
 
     if (!currentPack || typeof currentPack === undefined)
-        return (<div className="empty">Select a SFX Pack to Edit</div>);
+        return (
+            <div className="empty">
+                Select a SFX Pack to Edit
+            </div>
+        );
 
     return (
         <div className="sfx-pack">
@@ -31,7 +41,10 @@ const SFXPack: React.FC = (): JSX.Element => {
                 <header className="sfx-pack-name">
                     { currentPack.packJSON.name } 
                     <span>
-                        { currentPack.packJSON.music ? "UI Music" : "UI SFX" }
+                        { currentPack.packJSON.music 
+                            ? "UI Music" 
+                            : "UI SFX" 
+                        }
                     </span>
                 </header>
                 <div className="top-inner x-start">
@@ -45,10 +58,6 @@ const SFXPack: React.FC = (): JSX.Element => {
                             ).length
                         }
                     </span>
-                    <button className="button-icon" onClick={() => setDisplayJSONForm(true)}>
-                        <EditIcon />
-                        <span>Edit</span>
-                    </button>
                 </div>
                 <div className="bottom-row">
                     <div className="sfx-pack-description">
@@ -56,22 +65,10 @@ const SFXPack: React.FC = (): JSX.Element => {
                         { currentPack.packJSON.description }
                     </div>
                     <div className="buttons">
-                        <FolderSelect 
-                            className="button-icon import"
-                        />
-
-                        { (currentPack.files.filter((f: AudioFileWithCustom) => (f.replacement ?? []).length > 0).length > 0) &&
-                            <button
-                                type="button"
-                                onClick={() => dispatch({
-                                    type: 'CLEAR_ALL_REPLACEMENTS',
-                                    payload: null
-                                })}
-                                className="button-icon clear-all"
-                            >
-                                Clear All
-                            </button>
-                        }
+                        <button className="button-icon" onClick={() => setDisplayJSONForm(true)}>
+                            <EditIcon />
+                            <span>Edit</span>
+                        </button>
                         <button
                             type = "button"
                             onClick={
@@ -87,18 +84,25 @@ const SFXPack: React.FC = (): JSX.Element => {
             </div>
             { (displayDownloads) &&
                 <Modal
-                    handleClose={ () => setDisplayDownloads(false) }
+                    handleClose={ 
+                        () => setDisplayDownloads(false) 
+                    }
                 >
                     <div className="modal downloads">
                         <header className="top">
                             <span>Download SFX Pack</span>
                             <button
                                 type = "button"
-                                onClick={ () => setDisplayDownloads(false) }
+                                onClick={ 
+                                    () => setDisplayDownloads(false) 
+                                }
                             >Cancel</button>
                         </header>
                         <div className="inner-content">
-                            <p>Choose what you would like to download. The SFX Pack will need to be placed in the folder at the path /home/deck/homebrew/sounds</p>
+                            <p>
+                                Choose what you would like to download. 
+                                The SFX Pack will need to be unzipped and the folder placed in the path /home/deck/homebrew/sounds on your Steam Deck
+                            </p>
                             <div className="buttons">
                                 <button
                                     type = "button"
@@ -111,6 +115,7 @@ const SFXPack: React.FC = (): JSX.Element => {
                                                     currentPack.files
                                                 );
                                             }
+                                            setDisplayDownloads(true);
                                         }
                                     }
                                 >
@@ -126,11 +131,12 @@ const SFXPack: React.FC = (): JSX.Element => {
                                                 let data: string = `text/json;charset=utf-8,${ encodeURIComponent(JSON.stringify(getPackJSON(currentPack?.packJSON, currentPack.files))) }`;
                                                 
                                                 initiateDownload(`data:${ data }`, 'pack.json');
+                                                setDisplayDownloads(true);
                                             }
                                         }
                                     }
                                 >
-                                    <span>Pack.json Only</span>
+                                    <span>Configuration (pack.json) Only</span>
                                     <DownloadIcon />
                                 </button>
                                 <button
@@ -140,6 +146,7 @@ const SFXPack: React.FC = (): JSX.Element => {
                                         () => {
                                             if (currentPack)
                                                 generatePackZipMusicOnly(currentPack.files)
+                                            setDisplayDownloads(true);
                                         }
                                     }
                                 >
@@ -175,16 +182,48 @@ const SFXPack: React.FC = (): JSX.Element => {
                     </div>
                 </Modal>
             }
+
             { (currentPack && currentPack.files.length > 0) &&
-                <div className="sfx-pack-files">
-                    {
-                        currentPack.files.map((f: AudioFileWithCustom) => (
-                            <Track
-                                key = { f.fileName }
-                                f = { f }
-                                currentPack = { currentPack as SFXPackProps }
+                <div className="sfx-pack-tracks">
+                    <div className="sfx-pack-tracks-top">
+                        <h2>Tracks</h2>
+                        <div className="buttons">
+                            <FolderSelect 
+                                className="button-icon import"
+                                format={ currentPack.packJSON.music 
+                                    ? ".MP3" 
+                                    : ".WAV"}
                             />
-                        ))
+
+                            { (currentPack.files.filter(
+                                ((f: AudioFileWithCustom) => (f.replacement ?? []).length > 0))
+                                    .length > 0
+                            ) &&
+                                <button
+                                    type="button"
+                                    onClick={
+                                        () => dispatch({
+                                            type: 'CLEAR_ALL_REPLACEMENTS',
+                                            payload: null
+                                        })
+                                    }
+                                    className="clear-all"
+                                >
+                                    Clear All
+                                </button>
+                            }
+                        </div>
+                    </div>
+                    {
+                        currentPack.files.map(
+                            (f: AudioFileWithCustom) => (
+                                <Track
+                                    key = { f.fileName }
+                                    f = { f }
+                                    currentPack = { currentPack as SFXPackProps }
+                                />
+                            )
+                        )
                     }
                 </div>
             }

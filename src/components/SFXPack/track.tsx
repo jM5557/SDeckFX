@@ -1,10 +1,10 @@
-import React, { MutableRefObject, RefObject, useContext, useEffect, useRef, useState } from "react";
+import React, { useContext } from "react";
 import { AudioFileWithCustom, SFXPack } from "../../types";
 import { ReactComponent as MusicIcon } from "./../../assets/shared/music-icon-w-32px.svg";
 import { ReactComponent as FileIcon } from "./../../assets/shared/file-icon-w-32px.svg";
 import { SFXItemsContext } from "../../context/SFXItems";
 import FileSelect from "./fileSelect";
-import { downloadCustomSFX, fileSizeToString, playAudio } from "../../util/helpers";
+import { playAudio } from "../../util/helpers";
 import ReplacementTrack from "./replacementTrack";
 
 interface TrackProps {
@@ -26,8 +26,15 @@ const Track: React.FC<TrackProps> = ({
             <div className="sfx-pack-track-top">
                 <div className="details">
                     <header className="default-name">
-                        <FileIcon className="file-icon" /> {f.fileName}
+                        <FileIcon className="file-icon" /> {
+                            f.title.length > 0 
+                                ? f.title 
+                                : f.fileName
+                        }
                     </header>
+                    <p className="description">
+                        { f.description }
+                    </p>
                 </div>
                 <div className="buttons">
                     {(f.title.length > 0) &&

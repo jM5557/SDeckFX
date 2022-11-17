@@ -33,9 +33,16 @@ const JSONForm: React.FC<JSONFormProps> = ({
     const [packJSON, setPackJSON] = useState<PackJSON>(defaultPackJSON)
     
     const handleDownload: Function = () => {
-        let data: string = `text/json;charset=utf-8,${ encodeURIComponent(JSON.stringify(packJSON)) }`;
+        let data: string = `text/json;charset=utf-8,${ 
+            encodeURIComponent(
+                JSON.stringify(packJSON)
+            )
+        }`;
 
-        initiateDownload(`data:${ data }`, 'pack.json');
+        initiateDownload(
+            `data:${ data }`, 
+            'pack.json'
+        );
     }
 
     const handleSubmit = () => {
@@ -63,9 +70,7 @@ const JSONForm: React.FC<JSONFormProps> = ({
     }
     return (
         <div className="json-form">
-            <form onSubmit={
-                () => { handleSubmit() }
-            }>
+            <form onSubmit={ handleSubmit }>
                 <div className="inner-form">
                     <label htmlFor="name">
                         <b>Name</b>

@@ -7,11 +7,13 @@ import { ReactComponent as FolderIcon } from "./../../assets/shared/folder-icon-
 interface FolderSelectProps {
     className?: string,
     isNewPack?: boolean
+    format?: string
 }
  
 const FolderSelect: React.FC<FolderSelectProps> = ({
     className,
-    isNewPack
+    isNewPack,
+    format
 }) => {
     const { dispatch } = useContext(SFXItemsContext);
 
@@ -41,9 +43,8 @@ const FolderSelect: React.FC<FolderSelectProps> = ({
                 className={ `${ className ?? "" }` }
             >
                 <FolderIcon />
-                <span>
-                    Import    
-                </span>
+                <span>Import</span> 
+                { format && <b>{ format }</b> }
             </button>
             <input
                 type = "file"

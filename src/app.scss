@@ -451,6 +451,60 @@ button {
   }
 }
 
+.no-editor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+  margin: auto;
+  text-align: center;
+  min-height: 60vh;
+
+  .cta-wrapper, header, h2 {
+    margin: 16px auto;
+  }
+
+  .cta-wrapper {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    margin-top: 32px;
+
+    .cta {
+      display: block;
+      padding: 32px;
+      background-color: $color_2;
+      color: $text_2;
+      border: none;
+      flex: 1 1;
+      border-radius: 4px;
+      transition: transform 0.22s cubic-bezier(0.19, 1, 0.22, 1);
+      width: 180px;
+
+      &:hover {
+        transform: scale(1.10);
+        box-shadow: 0px 0px 16px -2px #111;
+      }
+
+      svg {
+        display: table;
+        margin: auto;
+        fill: #FFF;
+      }
+
+      &.download {
+        background-color: $accent_1;
+        color: $bg_1;
+        margin: 0px 0px 0px 8px;
+
+        svg path {
+          fill: $bg_1;
+        }
+      }
+    }
+  }
+}
+
 .editor {
   display: flex;
   align-items: stretch;

@@ -22,7 +22,7 @@ let defaultMusicPack: Function = (id?:string, packJSON?: PackJSON) => ({
     },
     files: [{ 
         title: "",
-        description: "Background Music",
+        description: "Background UI music that plays in the menus",
         fileName: "menu_music.mp3",
         format: "mp3",
         replacement: []
@@ -74,8 +74,8 @@ export type AppState = {
 
 let initialSFXPack = defaultSFXPack();
 const initialState: AppState = {
-    sfxPacks: [initialSFXPack],
-    currentId: initialSFXPack.id
+    sfxPacks: [],
+    currentId: null
 }
 
 const reducer = (
@@ -128,6 +128,7 @@ const reducer = (
         }
         case 'ADD_SFX_PACK':
             let id: string = uuidv4();
+
             return {
                 currentId: id,
                 sfxPacks: [
