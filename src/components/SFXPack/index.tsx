@@ -100,8 +100,7 @@ const SFXPack: React.FC = (): JSX.Element => {
                         </header>
                         <div className="inner-content">
                             <p>
-                                Choose what you would like to download. 
-                                The SFX Pack will need to be unzipped and the folder placed in the path /home/deck/homebrew/sounds on your Steam Deck
+                                Choose Your Download: 
                             </p>
                             <div className="buttons">
                                 <button
@@ -154,6 +153,9 @@ const SFXPack: React.FC = (): JSX.Element => {
                                     <DownloadIcon />
                                 </button>
                             </div>
+                            <p>
+                                To install, the SFX Pack will need to be unzipped and the folder placed in the path /home/deck/homebrew/sounds on your Steam Deck
+                            </p>
                         </div>
                     </div>
                 </Modal>

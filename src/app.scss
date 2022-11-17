@@ -503,6 +503,35 @@ button {
       }
     }
   }
+  @media all and (max-width: 720px) {
+    small {
+      display: table;
+      font-size: small;
+    }
+    
+    h2 {
+      margin-top: 32px;
+    }
+    
+    header {
+      margin: 4px auto;
+    }
+
+    header {
+      max-width: 75%;
+    }
+
+    .cta-wrapper {
+      align-items: stretch;
+      justify-content: center;
+      flex-flow: column;
+  
+      .cta.download {
+        margin-left: auto;
+        margin-top: 8px;
+      }
+    }
+  }
 }
 
 .editor {

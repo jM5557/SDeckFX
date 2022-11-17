@@ -37,7 +37,6 @@ const AppBody = () => {
   ), []);
 
   const InnerContent = useCallback(() => {
-    console.log(state);
     if (state.sfxPacks.length > 0)
       return (
         <div className="editor">
@@ -60,6 +59,11 @@ const AppBody = () => {
           {ImportButton("cta")}
           {CreateButton("cta download")}
         </div>
+        <small>
+          To import, your folder must contain a valid configuration file (pack.json).
+            <br/>
+          Check the requirements above to learn more.
+        </small>
       </div>
     )
   }, [state]);

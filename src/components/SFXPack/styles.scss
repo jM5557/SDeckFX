@@ -466,14 +466,6 @@
                     }
                 }
             }
-
-            @media all and (max-width: 402px) {
-                .buttons {
-                    .download {
-                        margin-top: 8px;
-                    }
-                }
-            }
         }
     }
 
@@ -614,7 +606,7 @@
     }
     .buttons {
         display: block;
-        margin-bottom: -8px;
+        margin-bottom: 16px;
         
         button {
             margin: auto;
