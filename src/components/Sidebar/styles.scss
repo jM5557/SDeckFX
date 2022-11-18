@@ -2,7 +2,21 @@
 
 .sidebar {
     max-height: 100vh;
-    overflow-y: auto;
+    overflow-y: hidden;
+
+    .previews-list {
+        max-height: 80vh;
+        overflow-y: scroll;
+        -ms-overflow-style: none;  /* Internet Explorer 10+ */
+        scrollbar-width: none; 
+        border-bottom: solid thin $color_2;
+        border-top: solid thin $color_2;
+        padding-top: 8px;
+
+        &::-webkit-scrollbar { 
+            display: none;  /* Safari and Chrome */
+        }
+    }
 
     .action-btns {
         button {
@@ -25,7 +39,7 @@
 
         .previews-list {
             display: flex;
-            align-items: center;
+            align-items: stretch;
             justify-content: flex-start;
             flex-flow: row nowrap;
             gap: 16px;
@@ -39,6 +53,7 @@
                 flex: 1 1;
                 margin-bottom: auto;
                 scroll-snap-align: start;
+                background-color: $color_2;
             }
         }
     }

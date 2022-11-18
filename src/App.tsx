@@ -14,7 +14,9 @@ const AppBody = () => {
   let { state, dispatch } = useContext(SFXItemsContext);
   const [displayForm, setDisplayForm] = useState<boolean>(false);
 
-  const CreateButton = useCallback((className: string = "button-icon download") => (
+  const CreateButton = useCallback((
+    className: string = "button-icon download"
+  ) => (
     <button
       type="button"
       className={className}

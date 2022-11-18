@@ -1,8 +1,6 @@
-import { useContext, useState } from "react";
+import { RefObject, useContext, useEffect, useRef } from "react";
 import { SFXItemsContext } from "../../context/SFXItems";
 import { SFXPack } from "../../types";
-import JSONForm from "../JSONForm";
-import FolderSelect from "../SFXPack/folderSelect";
 import Preview from "../SFXPack/preview";
 import "./styles.scss";
 
@@ -16,6 +14,19 @@ const Sidebar: React.FC<SidebarProps> = ({
     CreateButton
 }) => {
     let  { state } = useContext(SFXItemsContext);
+
+    let ref: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+    
+    useEffect(
+        () => {
+            if (ref.current) {
+                ref.current.scrollTop = ref.current.scrollHeight;
+                ref.current.scrollLeft = ref.current.scrollWidth - ref.current.clientWidth;
+                console.log(ref.current.scrollWidth, ref.current.clientWidth);
+            }
+        }, 
+        [state.sfxPacks.length]
+    )
     
     return (
         <aside className="sidebar">
@@ -24,7 +35,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 { CreateButton }
             </div>
 
-            <div className="previews-list">
+            <div className="previews-list" ref = { ref }>
                 {
                     state.sfxPacks.map((p: SFXPack) => (
                         <Preview

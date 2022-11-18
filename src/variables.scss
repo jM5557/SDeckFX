@@ -11,3 +11,15 @@ $accent_1: #5bb0ff;
 $accent_2: #a0cefa;
 $text_1: #FEFEFE;
 $text_2: #c8c8c8;
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}

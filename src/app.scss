@@ -177,8 +177,8 @@ button {
 }
 
 * {
-    margin-block-end: auto;
-    margin-block-start: auto;
+  margin-block-end: unset;
+  margin-block-start: unset;
 }
 
 .boxes {
@@ -380,7 +380,8 @@ button {
   }
 
   &.selected {
-    border: solid 3px $accent_1;
+    position: relative;
+    border-bottom: solid 4px $accent_1;
   }
 }
 
@@ -469,6 +470,7 @@ button {
     align-items: stretch;
     justify-content: center;
     margin-top: 32px;
+    margin-bottom: 32px;
 
     .cta {
       display: block;
@@ -495,7 +497,7 @@ button {
       &.download {
         background-color: $accent_1;
         color: $bg_1;
-        margin: 0px 0px 0px 8px;
+        margin: 0px 0px 0px 24px;
 
         svg path {
           fill: $bg_1;
@@ -527,9 +529,31 @@ button {
       flex-flow: column;
   
       .cta.download {
-        margin-left: auto;
-        margin-top: 8px;
+        margin: 16px auto auto auto;
       }
+    }
+  }
+
+  @media all and (max-width: 512px) {
+    padding-left: 16px;
+    padding-right: 16px;
+
+    header {
+      max-width: 100%;
+    }
+
+    .cta-wrapper {
+      display: block;
+      width: 100%;
+
+      .cta {
+        margin: auto;
+        max-width: unset;
+        transform: scale(1.05);
+      }
+    }
+    small {
+      text-align: left;
     }
   }
 }

@@ -5,7 +5,7 @@
 
     .inner {
         max-width: 640px;
-        text-align: left;
+        text-align: center;
         margin: auto;
 
         .links {
@@ -15,6 +15,16 @@
 
             b {
                 margin-right: 8px;
+            }
+        }
+    }
+
+    @media all and (max-width: 512px) {
+        .inner {
+            text-align: left;
+
+            .links {
+                justify-content: flex-start;
             }
         }
     }

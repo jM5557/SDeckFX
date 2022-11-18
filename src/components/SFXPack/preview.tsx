@@ -1,6 +1,7 @@
-import { useContext } from "react";
+import { SyntheticEvent, useContext } from "react";
 import { SFXItemsContext } from "../../context/SFXItems";
 import { PackJSON, SFXPack } from "../../types";
+import { handleClickableElement } from "../../util/keyboard";
 import { ReactComponent as TrashIcon } from "./../../assets/shared/trash-icon-w-32px.svg";
 import "./styles.scss";
 
@@ -23,6 +24,19 @@ export const Preview: React.FC<PreviewProps> = ({
                     : "" 
                 }`
             }
+            tabIndex = { 0 }
+            role="button"
+            onKeyDown={
+                (e: SyntheticEvent) => handleClickableElement(
+                    e, 
+                    () => {
+                        dispatch({
+                            type: 'SET_CURRENT_ID',
+                            payload: id
+                        })
+                    }
+                )
+            }
             onClick = {
                 () => {
                     dispatch({
@@ -32,12 +46,10 @@ export const Preview: React.FC<PreviewProps> = ({
                 }
             }
         >
-            <span className="pack-type">{ packJSON.music ? "UI Music" : "UI SFX"}</span>
-            <header className="name">{ packJSON.name }</header>
-            <small className="author">
-                Created by { packJSON.author }
-            </small>
-            <div className="buttons">
+            <div className="top">
+                <span className="pack-type">
+                    { packJSON.music ? "UI Music" : "UI SFX"}
+                </span>
                 <button 
                     type = "button"
                     onClick={
@@ -48,25 +60,16 @@ export const Preview: React.FC<PreviewProps> = ({
                             })
                         }
                     }
-                    className="button-icon delete"
+                    className="button-icon-only delete"
                 >
+                    <TrashIcon />
                     <span>Delete</span>
                 </button>
-                <button
-                    type = "button"
-                    onClick={
-                        () => {
-                            dispatch({
-                                type: 'SET_CURRENT_ID',
-                                payload: id
-                            })
-                        }
-                    }
-                    className = "view"
-                >
-                    View
-                </button>
             </div>
+            <header className="name">{ packJSON.name }</header>
+            <small className="author">
+                Created by { packJSON.author }
+            </small>
         </div>
     )
 }
