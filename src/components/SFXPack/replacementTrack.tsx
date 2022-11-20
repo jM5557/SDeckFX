@@ -17,7 +17,7 @@ const ReplacementTrack: React.FC<ReplacementTrackProps> = ({
     trackFormat
 }) => {
     let audio: MutableRefObject<HTMLAudioElement | null> = useRef<HTMLAudioElement>(null);
-    let interval: MutableRefObject<number | null> = useRef<number>(0);
+    let interval: MutableRefObject<NodeJS.Timer | null> = useRef<NodeJS.Timer | null>(null);
     let seeker: MutableRefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
     let thumb: MutableRefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
 
@@ -101,8 +101,11 @@ const ReplacementTrack: React.FC<ReplacementTrackProps> = ({
             } else {
                 audio.current.pause();
                 setIsPlaying(false);
-                clearInterval(interval.current);
-                interval.current = null;
+
+                if (interval.current) {
+                    clearInterval(interval.current);
+                    interval.current = null;
+                }
             }
         }
     }

@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "dev": "DEBUG=vite-plugin-pwa:* SW_DEV=true SW_INLINE=auto vite --force",
+    "build": "tsc && DEBUG=vite-plugin-pwa:* vite build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -22,6 +22,8 @@
     "@types/uuid": "^8.3.4",
     "@vitejs/plugin-react": "^2.2.0",
     "typescript": "^4.6.4",
-    "vite": "^3.2.0"
+    "vite": "^3.2.0",
+    "vite-plugin-pwa": "^0.13.3",
+    "workbox-window": "^6.5.4"
   }
 }
