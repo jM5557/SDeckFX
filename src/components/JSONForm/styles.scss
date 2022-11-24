@@ -25,7 +25,7 @@
 
     label {
         display: block;
-        margin-bottom: 16px;
+        margin-bottom: 24px;
 
         b {
             font-family: $headerFont;
@@ -46,15 +46,35 @@
         padding: 0px 0px;
         margin-bottom: 16px;
 
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        .buttons {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
 
         b {
             font-family: $headerFont;
             display: table;
             color: $accent_1;
-            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .pack-type-button {
+            background-color: $color_2;
+            color: $text_1;
+            padding: 12px 32px;
+            border-radius: 500px;
+            border: none;
+            font-size: small;
+
+            &.selected {
+                background-color: $accent_1;
+                color: $color_1;
+            }
+
+            &:nth-of-type(1) {
+                margin-right: 8px;
+            }
         }
 
         .button-icon {
@@ -66,16 +86,20 @@
         }
     }
 
-    .buttons {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+    .actions {
+        margin-top: 32px;
 
         button {
+            width: 100%;
+            padding: 16px;
+            margin-bottom: 8px;
+            border-radius: 12px;
+
             svg {
                 width: 18px;
                 height: 18px;
             }
+
             &.download {
                 flex: 1 1;
                 margin-right: 0px;

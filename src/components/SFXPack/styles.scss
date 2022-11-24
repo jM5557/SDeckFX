@@ -129,8 +129,12 @@
 
 .sfx-pack-track {
     width: 100%;
-    padding: 16px 0px;
-    border-top: solid thin $color_2;
+    padding: 24px 16px;
+    border-radius: 8px;
+
+    &:hover {
+        background-color: $color_1;
+    }
 
     .description {
         max-width: 480px;
@@ -192,7 +196,7 @@
         justify-content: space-between;
 
         .button-icon-only {
-            margin-right: 8px;
+            margin-right: 16px;
             padding: 8px;
             border-radius: 4px;
             &:hover {
@@ -406,6 +410,10 @@
         .buttons {
             justify-content: flex-start;
 
+            .button-icon-only {
+                margin-right: 8px;
+            }
+
             .browse-btn {
                 margin-right: 0px;
                 margin-left: auto;
@@ -559,7 +567,7 @@
             align-items: center;
             justify-content: space-between;
             position: sticky;
-            top: 0px;
+            top: -1px;
             padding-top: 16px;
             padding-bottom: 16px;
             background-color: $bg_1;

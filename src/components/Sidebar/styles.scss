@@ -8,9 +8,7 @@
         max-height: 80vh;
         overflow-y: scroll;
         -ms-overflow-style: none;  /* Internet Explorer 10+ */
-        scrollbar-width: none; 
-        border-bottom: solid thin $color_2;
-        border-top: solid thin $color_2;
+        scrollbar-width: none;
         padding-top: 8px;
 
         &::-webkit-scrollbar { 
@@ -23,6 +21,8 @@
             flex: 1 1;
             transition: opacity 0.32s cubic-bezier(0.19, 1, 0.22, 1);
             margin-right: 0px;
+            border-radius: 16px;
+            padding: 14px;
             
             &:hover {
                 opacity: 0.65;

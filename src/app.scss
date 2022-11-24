@@ -456,48 +456,69 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-flow: column wrap;
   margin: auto;
-  text-align: center;
-  min-height: 60vh;
+  padding: 64px 16px;
+  background-color: $color_2;
 
-  .cta-wrapper, header, h2 {
+  .no-editor-body-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      border-radius: 32px;
+      width: 240px;
+      margin-right: 48px;
+    }
+  }
+  
+  .no-editor-body {
+    text-align: left;
+    max-width: 900px;
+    margin: auto;
+  }
+
+  .cta-wrapper, header {
     margin: 16px auto;
   }
 
   .cta-wrapper {
     display: flex;
     align-items: stretch;
-    justify-content: center;
+    justify-content: flex-start;
     margin-top: 32px;
     margin-bottom: 32px;
+    margin-left: 0px;
 
     .cta {
-      display: block;
-      padding: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 16px;
       background-color: $color_2;
-      color: $text_2;
+      color: $text_1;
       border: none;
-      flex: 1 1;
-      border-radius: 4px;
-      transition: transform 0.22s cubic-bezier(0.19, 1, 0.22, 1);
+      border-radius: 16px;
       width: 180px;
 
-      &:hover {
-        transform: scale(1.10);
-        box-shadow: 0px 0px 16px -2px #111;
+      svg {
+        fill: #FFF;
+        width: 24px;
+        height: 24px;
+        margin-right: 16px;
+        transition: transform 0.22s cubic-bezier(0.19, 1, 0.22, 1);
       }
 
-      svg {
-        display: table;
-        margin: auto;
-        fill: #FFF;
+      &:hover {
+        svg {
+          transform: scale(1.25);
+        }
       }
 
       &.download {
         background-color: $accent_1;
         color: $bg_1;
-        margin: 0px 0px 0px 24px;
+        margin: 0px 16px 0px 0px;
 
         svg path {
           fill: $bg_1;
@@ -505,32 +526,23 @@ button {
       }
     }
   }
+
   @media all and (max-width: 720px) {
+    .no-editor-body-wrapper {
+      display: block;
+
+      img {
+        max-width: 180px;
+        width: 85%;
+        margin: auto auto 32px;
+        display: block;
+      }
+    }
+
     small {
       display: table;
       font-size: small;
-    }
-    
-    h2 {
-      margin-top: 32px;
-    }
-    
-    header {
-      margin: 4px auto;
-    }
-
-    header {
-      max-width: 75%;
-    }
-
-    .cta-wrapper {
-      align-items: stretch;
-      justify-content: center;
-      flex-flow: column;
-  
-      .cta.download {
-        margin: 16px auto auto auto;
-      }
+      margin: auto;
     }
   }
 
@@ -549,9 +561,17 @@ button {
       .cta {
         margin: auto;
         max-width: unset;
-        transform: scale(1.05);
+        width: 100%;
+        border-radius: 8px;
+        padding: 16px;
+        
+        &.download {
+          margin-left: auto;
+          margin-bottom: 8px;
+        }
       }
     }
+
     small {
       text-align: left;
     }
@@ -600,13 +620,6 @@ button {
 }
 
 .modal {
-  padding: 16px;
-  background-color: $color_1;
-  border-radius: 8px;
-  margin-right: auto;
-  width: 90vw;
-  max-width: 480px;
-
   .top {
     display: flex;
     align-items: center;

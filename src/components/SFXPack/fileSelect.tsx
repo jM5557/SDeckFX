@@ -21,7 +21,7 @@ const FileSelect: React.FC<FileSelectProps> = ({
                 }
                 className = { className ?? "" }
             >
-                Browse
+                Replace
             </button>
             <input 
                 type="file"

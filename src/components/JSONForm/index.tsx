@@ -131,57 +131,43 @@ const JSONForm: React.FC<JSONFormProps> = ({
                     { (formType === "CREATE") &&
                         <div className="pack-type">
                             <b>Pack Type</b>
-                            <button
-                                type = "button"
-                                onClick={
-                                    () => {
-                                        setPackJSON({
-                                            ...packJSON,
-                                            music: true
-                                        })
+                            <div className="buttons">
+                                <button
+                                    type = "button"
+                                    onClick={
+                                        () => {
+                                            setPackJSON({
+                                                ...packJSON,
+                                                music: true
+                                            })
+                                        }
                                     }
-                                }
-                                className={`button-icon ${ packJSON.music ? "selected" : "" }`}
-                            >
-                                UI Music
-                            </button>
-                            <button
-                                type = "button"
-                                onClick={
-                                    () => {
-                                        setPackJSON({
-                                            ...packJSON,
-                                            music: false
-                                        })
+                                    className={`pack-type-button ${ packJSON.music ? "selected" : "" }`}
+                                >
+                                    UI Music
+                                </button>
+                                <button
+                                    type = "button"
+                                    onClick={
+                                        () => {
+                                            setPackJSON({
+                                                ...packJSON,
+                                                music: false
+                                            })
+                                        }
                                     }
-                                }
-                                className={`button-icon ${ packJSON.music ? "" : "selected" }`}
-                            >
-                                UI SFX
-                            </button>
+                                    className={`pack-type-button ${ packJSON.music ? "" : "selected" }`}
+                                >
+                                    UI SFX
+                                </button>
+                            </div>
                         </div>
                     }
                 </div>
 
                 { (packJSON.name.length > 0 
                     && packJSON.author.length > 0) &&
-
-                    <div className="buttons">
-                        <button 
-                            type = "submit"
-                            onClick={
-                                (e: SyntheticEvent) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-
-                                    handleDownload();
-                                }
-                            }
-                            className = "button-icon"
-                        >
-                            <DownloadIcon />
-                            <span>Download</span>
-                        </button>
+                    <div className="actions">
                         <button 
                             type = "submit"
                             onClick={
@@ -197,6 +183,21 @@ const JSONForm: React.FC<JSONFormProps> = ({
                             className = "button-icon download"
                         >
                             <span>Submit</span>
+                        </button>
+                        <button 
+                            type = "submit"
+                            onClick={
+                                (e: SyntheticEvent) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+
+                                    handleDownload();
+                                }
+                            }
+                            className = "button-icon"
+                        >
+                            <DownloadIcon />
+                            <span>Download</span>
                         </button>
                     </div>
                 }                            

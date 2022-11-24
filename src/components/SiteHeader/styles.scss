@@ -1,11 +1,10 @@
 @import "./../../variables.scss";
 
 .site-header {
-    padding: 8px 16px;
+    padding: 16px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: solid thin $color_2;
 
     .logo {
         svg { 
