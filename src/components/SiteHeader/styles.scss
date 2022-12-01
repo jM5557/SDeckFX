@@ -7,6 +7,8 @@
     align-items: center;
 
     .logo {
+        line-height: 0px;
+        
         svg { 
             fill: $bg_1; 
             width: 128px;
@@ -18,7 +20,7 @@
         color: $text_1;
         background-color: transparent;
         border: none;
-        padding: 16px;
+        padding: 8px;
         border-radius: 4px;
 
         &:hover {
@@ -31,6 +33,15 @@
         font-size: small;
         margin-right: 0px;
         display: block;
+    }
+
+    @media all and (max-width: 640px) {
+        .logo {
+            svg {
+                width: 96px;
+                height: 36px;
+            }
+        }
     }
 }
 

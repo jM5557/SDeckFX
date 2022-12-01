@@ -457,7 +457,7 @@ button {
   align-items: center;
   justify-content: center;
   margin: auto;
-  padding: 8vw 16px 14vw;
+  padding: 8vw 16px 200px;
   background: linear-gradient(1deg, #1f2730, transparent);
 
   .no-editor-body-wrapper {
@@ -541,6 +541,9 @@ button {
   }
 
   @media all and (max-width: 720px) {
+    padding-left: 16px;
+    padding-right: 16px;
+
     .no-editor-body-wrapper {
       display: block;
 
@@ -559,9 +562,8 @@ button {
     }
   }
 
-  @media all and (max-width: 512px) {
-    padding-left: 16px;
-    padding-right: 16px;
+  @media all and (max-width: 640px) {
+    padding-bottom: 80px;
 
     .no-editor-body {
       h2 {

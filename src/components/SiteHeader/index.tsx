@@ -1,9 +1,6 @@
 import "./styles.scss"
 import { ReactComponent as Logomark180px} from "./logomark-w-180px.svg";
-import { ReactComponent as Logomark90px} from "./logomark-w-90px.svg";
-import { ReactComponent as DownloadIcon } from "./../../assets/shared/download-icon-w-32px.svg";
-import { ReactComponent as MusicIcon } from "./../../assets/shared/music-icon-w-32px.svg";
-import { ReactComponent as FileIcon } from "./../../assets/shared/file-icon-w-32px.svg";
+import { ReactComponent as RequirementsIcon } from "./../../assets/shared/requirements-icon-w-32px.svg";
 import Modal from "../Modal";
 import { useState } from "react";
 
@@ -19,8 +16,12 @@ const SiteHeader = () => {
                 onClick={
                     () => setDisplayRequirements(true)
                 }
+                className = "button-icon"
             >
-                Requirements
+                <RequirementsIcon />
+                <span>
+                    Requirements    
+                </span>
             </button>
 
             { (displayRequirements) &&
