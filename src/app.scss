@@ -507,7 +507,7 @@ button {
       align-items: center;
       justify-content: center;
       padding: 16px 16px;
-      background-color: $color_2;
+      background-color: #242c36;
       color: $text_1;
       border: none;
       border-radius: 16px;
@@ -563,13 +563,15 @@ button {
     padding-left: 16px;
     padding-right: 16px;
 
-    h2 {
-      font-size: 1.75rem;
-    }
-
-    header {
-      max-width: 100%;
-      font-size: 1rem;
+    .no-editor-body {
+      h2 {
+        font-size: 2rem;
+      }
+  
+      header {
+        max-width: 100%;
+        font-size: 1.25rem;
+      }
     }
 
     .cta-wrapper {
@@ -661,9 +663,12 @@ button {
 }
 
 .how-it-works {
-  max-width: 720px;
-  margin: 72px auto;
-  padding: 16px;
+  max-width: 900px;
+  margin: -152px auto auto;
+  padding: 32px 32px;
+  background-color: #1f262e;
+  border-radius: 12px;
+  box-shadow: 0px -8px 24px -6px #161b21;
 
   h2 {
     margin-bottom: 16px;
@@ -679,14 +684,21 @@ button {
   }
 
   pre {
-    background-color: $color_2;
+    background-color: #161b21;
     border-radius: 8px;
     padding: 16px;
     margin-top: 16px;
     margin-bottom: 16px;
+    overflow-x: auto;
   }
 
   a, a:visited {
     color: $accent_1;
+  }
+
+  @media all and (max-width: 640px) {
+    padding: 16px;
+    margin-top: -32px;
+    border-radius: 0px;
   }
 }

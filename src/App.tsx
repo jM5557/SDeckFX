@@ -55,26 +55,33 @@ const AppBody = () => {
         </div>
       );
     else return (
-      <div className="no-editor">
-        <div className="no-editor-body-wrapper">
-          <img alt="logo" src="/assets/logomark-color.png" />
-          <div className="no-editor-body">
-            <h2>Get Started</h2>
-            <header>
-              Customize your Steam Deck's UI SFX & Music
-            </header>
-            <div className="cta-wrapper">
-              {CreateButton("cta download")}
-              {ImportButton("cta")}
+      <>
+        <div className="no-editor">
+          <div className="no-editor-body-wrapper">
+            <img alt="logo" src="/assets/logomark-color.png" />
+            <div className="no-editor-body">
+              <h2>Get Started</h2>
+              <header>
+                Customize your Steam Deck's UI SFX & Music
+              </header>
+              <div className="cta-wrapper">
+                {CreateButton("cta download")}
+                {ImportButton("cta")}
+              </div>
+              <small>
+                To import, your folder must contain a valid configuration file (pack.json).
+                <br />
+                Check the requirements above to learn more.
+              </small>
             </div>
-            <small>
-              To import, your folder must contain a valid configuration file (pack.json).
-              <br />
-              Check the requirements above to learn more.
-            </small>
           </div>
         </div>
-      </div>
+        <ReactMarkdown
+          className="how-it-works"
+          children={ howItWorks }
+          remarkPlugins={[remarkGfm]}
+        />
+      </>
     )
   }, [state]);
 
@@ -105,7 +112,6 @@ const AppBody = () => {
   return (
     <>
       {InnerContent()}
-
       {(displayForm) && (CreateModal)}
     </>
   )
@@ -118,11 +124,6 @@ function App() {
       <main>
         <SFXItemsProvider>
           <AppBody />
-          <ReactMarkdown
-            className="how-it-works"
-            children={ howItWorks }
-            remarkPlugins={[remarkGfm]}
-          />
         </SFXItemsProvider>
       </main>
       <SiteFooter />
