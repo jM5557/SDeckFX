@@ -12,6 +12,8 @@
     "jszip": "^3.10.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-markdown": "^8.0.3",
+    "remark-gfm": "^3.0.1",
     "sass": "^1.55.0",
     "uuid": "^9.0.0",
     "vite-plugin-svgr": "^2.2.2"

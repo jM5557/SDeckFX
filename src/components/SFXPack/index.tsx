@@ -40,7 +40,7 @@ const SFXPack: React.FC = (): JSX.Element => {
             <div className="top">
                 <header className="sfx-pack-name">
                     { currentPack.packJSON.name } 
-                    <span>
+                    <span className="pack-type">
                         { currentPack.packJSON.music 
                             ? "UI Music" 
                             : "UI SFX" 

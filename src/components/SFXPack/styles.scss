@@ -12,12 +12,6 @@
         background-color: $color_2;
     }
 
-    &:hover {
-        .pack-type {
-            background-color: $bg_1;
-        }
-    }
-
     &.selected {
         &:before {
             content: "";
@@ -57,6 +51,8 @@
         font-weight: 600;
         border-radius: 500px;
         padding: 2px 12px;
+        background-color: rgb(138, 89, 165);
+        color: rgb(34, 12, 34);
     }
 
     .name {
@@ -140,6 +136,7 @@
         max-width: 480px;
         font-size: 0.90rem;
         margin-top: 8px;
+        color: #b5b5b5;
     }
 
     .sfx-pack-track-top {
@@ -461,11 +458,11 @@
                 button {
                     flex: 1 1;
                     white-space: nowrap;
+                    border-radius: 8px;
                 }
 
                 .download {
                     background-color: $accent_1;
-                    border-radius: 4px;
                     margin-right: 0px;
 
                     svg {
@@ -515,6 +512,8 @@
             border-radius: 500px;
             margin-left: 8px;
             line-height: 1rem;
+            background-color: rgb(138, 89, 165);
+            color: rgb(34, 12, 34);
         }
     }
 
@@ -546,9 +545,7 @@
     }
 
     .sfx-pack-description {
-        padding: 8px 16px 16px;
-        border-radius: 4px;
-        background-color: #{ $color_2 };
+        padding: 0px;
         display: table;
 
         b {

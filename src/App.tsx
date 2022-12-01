@@ -1,7 +1,7 @@
 import "./app.scss";
 import SiteHeader from './components/SiteHeader';
 import SiteFooter from './components/SiteFooter';
-import { useEffect, useRef, SyntheticEvent, useContext, useState, useMemo, useCallback } from 'react';
+import { useContext, useState, useMemo, useCallback } from 'react';
 import { SFXItemsContext, SFXItemsProvider } from './context/SFXItems';
 import Sidebar from './components/Sidebar';
 import SFXPack from './components/SFXPack';
@@ -9,6 +9,9 @@ import Modal from "./components/Modal";
 import JSONForm from "./components/JSONForm";
 import FolderSelect from "./components/SFXPack/folderSelect";
 import { ReactComponent as AddIcon } from "./assets/shared/add-icon-w-32px.svg";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from 'remark-gfm';
+import { howItWorks } from "./data/markdown";
 
 const AppBody = () => {
   let { state, dispatch } = useContext(SFXItemsContext);
@@ -54,7 +57,7 @@ const AppBody = () => {
     else return (
       <div className="no-editor">
         <div className="no-editor-body-wrapper">
-          <img alt = "logo" src = "/assets/logomark-color.png" />
+          <img alt="logo" src="/assets/logomark-color.png" />
           <div className="no-editor-body">
             <h2>Get Started</h2>
             <header>
@@ -66,7 +69,7 @@ const AppBody = () => {
             </div>
             <small>
               To import, your folder must contain a valid configuration file (pack.json).
-                <br/>
+              <br />
               Check the requirements above to learn more.
             </small>
           </div>
@@ -115,6 +118,11 @@ function App() {
       <main>
         <SFXItemsProvider>
           <AppBody />
+          <ReactMarkdown
+            className="how-it-works"
+            children={ howItWorks }
+            remarkPlugins={[remarkGfm]}
+          />
         </SFXItemsProvider>
       </main>
       <SiteFooter />
